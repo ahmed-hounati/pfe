@@ -5,7 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -16,8 +23,7 @@
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" aria-label="Company" title="Company" class="inline-flex items-center mr-8">
-                            <img src="https://cdn.dribbble.com/users/544003/screenshots/16033104/media/4547b5deb38d689016d132705f909650.jpg?resize=1000x750&vertical=center"
-                                class="w-8 text-teal-accent-400" alt="logo">
+                            <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
                             <li><a href="/categories" aria-label="Our product" title="Our product"
@@ -33,13 +39,38 @@
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li>
-                            <a href="/logout"
-                                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                aria-label="Sign up" title="Sign up">
-                                logout
-                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                    aria-label="Logout" title="Logout">Logout</button>
+                            </form>
+                        </li>
+                        <li id="cartIcon">
+                            <i class="fa-solid fa-cart-shopping fa-lg text-white"></i>
+                            <span id="orderCount"
+                                class="inline-block px-2 py-1 text-sm font-semibold leading-tight text-white bg-blue-500 rounded-full">
+                            </span>
                         </li>
                     </ul>
+                    <div id="cartModal"
+                        class="fixed inset-0 z-50 bg-gray-900 h-4/5 bg-opacity-0 py-24 px-12 flex justify-end hidden">
+                        <div
+                            class="bg-gradient-to-r from-green-400 via-green-500 to-green-600 p-6 rounded-lg max-h-full overflow-y-auto">
+                            <div class="flex flex-row justify-between">
+                                <h2 class="text-xl font-semibold mb-4">Your Cart</h2>
+                                <button id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded-lg"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </div>
+
+                            <div id="confirmContainer" class="flex flex-row mt-4">
+                                <button id="confirmButton"
+                                    class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Commande</button>
+                            </div>
+                            <ul id="cartItems" class="py-6"></ul>
+                        </div>
+                    </div>
+
                     <!-- Mobile menu -->
                     <div class="lg:hidden">
                         <button aria-label="Open Menu" title="Open Menu"
@@ -106,174 +137,211 @@
             </div>
         </div>
     </nav>
-    <section> </section>
-    <footer>
-        <div class="relative mt-16 bg-[#F2BD36]">
-            <svg class="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-deep-purple-accent-400"
-                preserveAspectRatio="none" viewBox="0 0 1440 54">
-            </svg>
-            <div class="px-4 pt-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-                <div class="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
-                    <div class="md:max-w-md lg:col-span-2">
-                        <a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
-                            <svg class="w-8 text-teal-accent-400" viewBox="0 0 24 24" stroke-linejoin="round"
-                                stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor"
-                                fill="none">
-                                <rect x="3" y="1" width="7" height="12"></rect>
-                                <rect x="3" y="17" width="7" height="6"></rect>
-                                <rect x="14" y="1" width="7" height="6"></rect>
-                                <rect x="14" y="11" width="7" height="12"></rect>
-                            </svg>
-                            <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Company</span>
-                        </a>
-                        <div class="mt-4 lg:max-w-sm">
-                            <p class="text-sm text-deep-purple-50">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                doloremque
-                                laudantium, totam rem aperiam.
-                            </p>
-                            <p class="mt-4 text-sm text-deep-purple-50">
-                                Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                                sunt
-                                explicabo.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-4">
-                        <div>
-                            <p class="font-semibold tracking-wide text-teal-accent-400">
-                                Category
-                            </p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">News</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">World</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Games</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">References</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class="font-semibold tracking-wide text-teal-accent-400">Cherry</p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Web</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">eCommerce</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Business</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Entertainment</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Portfolio</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class="font-semibold tracking-wide text-teal-accent-400">Apples</p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Media</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Brochure</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Nonprofit</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Educational</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Projects</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class="font-semibold tracking-wide text-teal-accent-400">
-                                Business
-                            </p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Infopreneur</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Personal</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Wiki</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Forum</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col justify-between pt-5 pb-10 border-t border-deep-purple-accent-200 sm:flex-row">
-                    <p class="text-sm text-gray-100">
-                        © Copyright 2020 Lorem Inc. All rights reserved.
-                    </p>
-                    <div class="flex items-center mt-4 space-x-4 sm:mt-0">
-                        <a href="/"
-                            class="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
-                                <path
-                                    d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a href="/"
-                            class="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400">
-                            <svg viewBox="0 0 30 30" fill="currentColor" class="h-6">
-                                <circle cx="15" cy="15" r="4"></circle>
-                                <path
-                                    d="M19.999,3h-10C6.14,3,3,6.141,3,10.001v10C3,23.86,6.141,27,10.001,27h10C23.86,27,27,23.859,27,19.999v-10   C27,6.14,23.859,3,19.999,3z M15,21c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S18.309,21,15,21z M22,9c-0.552,0-1-0.448-1-1   c0-0.552,0.448-1,1-1s1,0.448,1,1C23,8.552,22.552,9,22,9z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a href="/"
-                            class="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
-                                <path
-                                    d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+    <section class="px-12 py-12">
+        <h1 class="text-3xl font-bold">ALL PLATS :</h1>
+        @if (session('success'))
+            <div class="bg-green-100 border mt-8 border-green-400 text-green-700 px-4 py-3 rounded relative"
+                role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                </span>
             </div>
+        @endif
+        @if (session('error'))
+            <div class="bg-red-100 border mt-8 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ session('error') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                </span>
+            </div>
+        @endif
+        <div class="p-24 flex flex-wrap items-center justify-center">
+            @foreach ($plats as $plat)
+                <div class="flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg">
+                    <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+                        style="transform: scale(1.5); opacity: 0.1;">
+                        <rect x="159.52" y="175" width="152" height="152" rx="8"
+                            transform="rotate(-45 159.52 175)" fill="white" />
+                        <rect y="107.48" width="152" height="152" rx="8"
+                            transform="rotate(-45 0 107.48)" fill="white" />
+                    </svg>
+                    <div class="relative pt-10 px-10 flex items-center justify-center">
+                        <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                            style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
+                        </div>
+                        <img class="relative w-40 rounded-xl" src="{{ asset('images/' . $plat->image) }}"
+                            alt="">
+                    </div>
+                    <div class="relative text-white px-6 pb-6 mt-6">
+                        <span class="block opacity-75 -mb-1">{{ $plat->category->name }}</span>
+                        <div class="flex justify-between gap-4">
+                            <span class="block font-semibold text-xl">{{ $plat->name }}</span>
+                            <span
+                                class="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center">${{ $plat->price }}</span>
+                        </div>
+                        <form action="{{ route('AddToCard', $plat->id) }}" method="POST">
+                            @csrf
+                            <button
+                                class="text-white mt-4 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><i
+                                    class="fa-solid fa-plus fa-xl"></i></button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
         </div>
-    </footer>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("cartIcon").addEventListener("click", function() {
+                document.getElementById("cartModal").classList.toggle("hidden");
+                fetchCartPlats();
+            });
+
+            document.getElementById("closeModal").addEventListener("click", function() {
+                document.getElementById("cartModal").classList.add("hidden");
+            });
+        });
+
+        function fetchCartPlats() {
+            $.ajax({
+                url: "/cart/plats",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    const cartItemsElement = $("#cartItems");
+                    cartItemsElement.empty();
+
+                    const deleteFormContainer = $("<div>").addClass("flex justify-center items-center");
+                    const deleteButton = $("<button>")
+                        .addClass("bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded")
+                        .text("Delete Selected Plats");
+                    $("#confirmContainer").append(deleteButton);
+
+                    deleteButton.click(function() {
+                        const selectedPlatIds = $("input[name='plat_checkbox']:checked").map(
+                            function() {
+                                return $(this).val();
+                            }).get();
+                        deleteSelectedPlats(selectedPlatIds);
+                    });
+                    deleteFormContainer.append(deleteButton);
+
+                    data.forEach(order => {
+                        const platName = order.plat.name;
+                        const platImage = "{{ asset('images/') }}" + '/' + order.plat.image;
+                        const platPrice = order.plat.price;
+                        const platId = order.plat.id;
+
+                        const container = $("<div>").addClass(
+                                "flex items-center border-b-2 border-gray-200 py-4")
+                            .attr("data-plat-id", platId);
+
+                        const checkbox = $("<input>").attr("type", "checkbox").attr("name",
+                            "plat_checkbox").val(platId).addClass("mr-2");
+                        const checkboxLabel = $("<label>").text("").addClass(
+                            "text-sm text-gray-500");
+                        const nameElement = $("<p>").addClass("text-lg font-semibold").text(platName);
+                        const imageElement = $("<img>").addClass("w-16 h-16 mr-4 object-cover rounded")
+                            .attr("src", platImage).attr("alt", platName + " Image");
+                        const priceElement = $("<p>").addClass("text-gray-600 ml-4").text("$" +
+                            platPrice);
+
+                        container.append(
+                            $("<div>").addClass("flex items-center").append(checkbox, checkboxLabel,
+                                imageElement, nameElement),
+                            priceElement
+                        );
+
+                        deleteFormContainer.append(container);
+                    });
+
+
+                    cartItemsElement.append(deleteFormContainer);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching cart items:", error);
+                },
+            });
+        }
+
+        function deleteSelectedPlats(platIds) {
+            $.ajax({
+                url: "/cart/delete",
+                type: "DELETE",
+                dataType: "json",
+                data: {
+                    ids: platIds
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log("Plats deleted successfully:", response);
+                    updateOrderCount();
+                    fetchCartPlats();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error deleting ashbi:", error);
+                },
+            });
+        }
+
+        $(document).ready(function() {
+            fetchCartPlats();
+        });
+
+        function updateOrderCount() {
+            $.ajax({
+                url: "/count",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    const orderCount = response.orderCount;
+                    $("#orderCount").text(orderCount);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching order count:", error);
+                }
+            });
+        }
+
+        updateOrderCount();
+
+        function confirmOrder() {
+            const platIds = [];
+            const cartItems = document.querySelectorAll("#cartItems > div");
+            cartItems.forEach(item => {
+                const platId = item.dataset.platId;
+                platIds.push(platId);
+                console.log(platIds)
+            });
+
+            $.ajax({
+                url: "/confirm/order",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    platIds: platIds
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log("Order confirmed successfully:", response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error confirming order:", error);
+                    cartItems.forEach(item => {
+                        const platId = item.dataset.platId;
+                        platIds.push(platId);
+                        console.log(platIds)
+                    });
+                },
+            });
+        }
+
+        document.getElementById("confirmButton").addEventListener("click", confirmOrder);
+    </script>
 </body>
+
 
 </html>

@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -33,11 +36,12 @@
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li>
-                            <a href="/logout"
-                                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                aria-label="Sign up" title="Sign up">
-                                logout
-                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                    aria-label="Logout" title="Logout">Logout</button>
+                            </form>
                         </li>
                     </ul>
                     <!-- Mobile menu -->
@@ -106,73 +110,43 @@
             </div>
         </div>
     </nav>
-    <section>
-        <div class="px-12 py-12">
-            <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Add Plat</h2>
+    <section class="py-12 px-12">
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-green-500" role="button"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <title>Close</title>
+                        <path
+                            d="M14.348 5.652a.5.5 0 01.708.708L10.707 10l4.35 4.35a.5.5 0 11-.708.708L10 10.707l-4.35 4.35a.5.5 0 01-.708-.708L9.293 10 4.644 5.652a.5.5 0 01.708-.708L10 9.293l4.35-4.35z" />
+                    </svg>
+                </span>
+            </div>
+        @endif
 
-                <form method="POST" action="{{ route('addPlat') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-
-                        <div class="flex items-center justify-center w-full">
-                            <label for="dropzone-file"
-                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                                            class="font-semibold">Click to upload</span> or drag and drop</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
-                                        800x400px)</p>
-                                </div>
-                                <input id="dropzone-file" type="file" name="image" class="hidden" />
-                            </label>
-                        </div>
-
-                        <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="name">Plat name</label>
-                            <input id="" type="text" name="name"
-                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                        </div>
-
-                        <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="price">Plat price</label>
-                            <input id="" type="text" name="price"
-                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                        </div>
-
-                        <div>
-                            <label class="text-gray-700 dark:text-gray-200" for="description">Plat description</label>
-                            <input id="description" type="text" name="description"
-                                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                        </div>
-
-                        <div class="mt-8">
-                            <label for="category" class="text-gray-700 dark:text-gray-200">Categories:
-                                <select name="category_id"
-                                    class=" text-gray-700 border rounded w-full sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 py-2 px-3 focus:outline-none focus:ring
-                                    focus:border-blue-300">
-                                    @foreach ($categories as $categorie)
-                                        <option value="{{ $categorie->id }}">
-                                            {{ $categorie->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </label>
-                        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            @foreach ($commands as $command)
+                <div class="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900"
+                    bis_skin_checked="1">
+                    <img src="https://source.unsplash.com/random/300x300/?1" alt=""
+                        class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500">
+                    <div class="mt-6 mb-2" bis_skin_checked="1">
+                        <span <h2 class="text-xl font-semibold tracking-wide">{{ $command->name }}</h2>
                     </div>
-
-                    <div class="flex justify-end mt-6">
-                        <button
-                            class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                    <p class="dark:text-gray-800">{{ $command->email }}</p>
+                    <div class="text-center">
                     </div>
-                </form>
-            </section>
+                    <div class="flex justify-between">
+                        <form method="POST" action="{{ route('command.accept', $command->id) }}">
+                            @csrf
+                            <button type="submit"
+                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">Accept</button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </section>
 </body>

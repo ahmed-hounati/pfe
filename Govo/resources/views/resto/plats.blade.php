@@ -130,7 +130,7 @@
             @foreach ($plats as $plat)
                 <div class="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900"
                     bis_skin_checked="1">
-                    <img src="https://source.unsplash.com/random/300x300/?1" alt=""
+                    <img src="{{ asset('images/' . $plat->image) }}" alt=""
                         class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500">
                     <div class="mt-6 mb-2" bis_skin_checked="1">
                         <span

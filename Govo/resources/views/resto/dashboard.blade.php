@@ -33,11 +33,12 @@
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li>
-                            <a href="/logout"
-                                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                aria-label="Sign up" title="Sign up">
-                                logout
-                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                    aria-label="Logout" title="Logout">Logout</button>
+                            </form>
                         </li>
                     </ul>
                     <!-- Mobile menu -->
@@ -112,6 +113,11 @@
                 <button type="button"
                     class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">My
                     Plats</button>
+            </a>
+            <a href="/commands">
+                <button type="button"
+                    class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">My
+                    commands</button>
             </a>
         </div>
     </section>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Category;
 use App\Models\Plat;
 use Illuminate\Http\Request;
@@ -29,6 +30,13 @@ class PlatController extends Controller
             'description' => 'required|min:5',
             'category_id' => 'required',
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+        } else {
+            $imageName = '';
+        }
 
         $resto_id = Auth::user()->id;
 
@@ -38,7 +46,7 @@ class PlatController extends Controller
         $plat->description = $request->description;
         $plat->category_id = $request->category_id;
         $plat->resto_id = $resto_id;
-        $plat->image = 'image.pnj';
+        $plat->image = $imageName;
         $plat->save();
 
         return redirect()->route('allPlats')->with('success', 'Plat created successfully');
@@ -78,5 +86,12 @@ class PlatController extends Controller
         $plat = Plat::findOrFail($id);
         $plat->delete();
         return redirect()->route('allPlats')->with('success', 'Plat deleted successfully');
+    }
+
+    public function getPlats()
+    {
+        $plats = Plat::all();
+        $orderCount = Card::where('user_id', Auth::user()->id)->count();
+        return view('user.dashboard', ['plats' => $plats, 'orderCount' => $orderCount]);
     }
 }

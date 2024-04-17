@@ -16,9 +16,15 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role === "admin") {
-            return $next($request);
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->role === "admin") {
+                return $next($request);
+            } else {
+                return redirect()->route('loginForm');
+            }
+        } else {
+            return redirect()->route('loginForm');
         }
-        return new Response("You don't have the permission", 403);
     }
 }

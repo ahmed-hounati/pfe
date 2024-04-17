@@ -45,14 +45,14 @@ class AuthController extends Controller
     }
     public function home()
     {
-        $plats = Plat::select('plats.*', DB::raw('COUNT(cards.plat_id) as total'))
-            ->join('cards', 'cards.plat_id', '=', 'plats.id')
-            ->groupBy('plats.id', 'plats.name', 'plats.price')
-            ->orderByDesc('total')
-            ->limit(3)
-            ->get();
+        // $plats = Plat::select('plats.*', DB::raw('COUNT(cards.plat_id) as total'))
+        //     ->join('cards', 'cards.plat_id', '=', 'plats.id')
+        //     ->groupBy('plats.id', 'plats.name', 'plats.price')
+        //     ->orderByDesc('total')
+        //     ->limit(3)
+        //     ->get();
 
-        return view('home', ['plats' => $plats]);
+        return view('home');
     }
 
 
