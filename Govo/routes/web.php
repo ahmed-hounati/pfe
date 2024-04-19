@@ -6,6 +6,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PlatController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,11 @@ Route::get('/user/dashboard', [PlatController::class, 'getPlats'])->name('user.d
 Route::post('/add/{id}/toCard/', [CardController::class, 'addToCard'])->name('AddToCard')->middleware('user');
 Route::get('/cart/plats', [CardController::class, 'cardPlats'])->name('carPlats')->middleware('user');
 Route::post('/confirm/order', [OrderController::class, 'confirmOrder'])->name('confirmOrder')->middleware('user');
-Route::delete('/cart/delete', [CardController::class, 'delete'])->name('cart.plats.delete')->middleware('user');
+Route::delete('/cart/{id}/delete', [CardController::class, 'delete'])->name('cart.plats.delete')->middleware('user');
 Route::get('/count', [CardController::class, 'getOrderCount'])->name('count')->middleware('user');
+
+
+Route::get('/card', [CardController::class, 'getCard'])->name('card')->middleware('user');
+Route::put('/card/plus/{id}', [CardController::class, 'plus'])->name('plus')->middleware('user');
+
+Route::put('/card/minus/{id}', [CardController::class, 'minus'])->name('minus')->middleware('user');

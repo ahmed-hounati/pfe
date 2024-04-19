@@ -10,21 +10,13 @@ class OrderController extends Controller
 {
     public function confirmOrder(Request $request)
     {
+
         $request->validate([
-            'platIds' => 'required|array',
-            'platIds.*' => 'required|integer',
+            'cardInfo' => 'required|array',
+            'cardInfo.*.id' => 'required|numeric',
+            'cardInfo.*.quantity' => 'required|numeric',
         ]);
-
-
-        $platIds = $request->input('platIds');
-        foreach ($platIds as $platId) {
-            $order = new Order;
-            $order->user_id = Auth::user()->id;
-            $order->plat_id = $platId;
-            $order->save();
-        }
-
-        return view('orderDetails');
+        dd($request->cardInfo);
     }
 
 }

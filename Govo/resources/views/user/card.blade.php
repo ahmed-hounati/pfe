@@ -46,14 +46,6 @@
                                     aria-label="Logout" title="Logout">Logout</button>
                             </form>
                         </li>
-                        <li>
-                            <a href="{{ route('card') }}">
-                                <i class="fa-solid fa-cart-shopping fa-lg text-white"></i>
-                                <span id="orderCount"
-                                    class="inline-block px-2 py-1 text-sm font-semibold leading-tight text-white bg-blue-500 rounded-full">
-                                </span>
-                            </a>
-                        </li>
                     </ul>
 
 
@@ -124,7 +116,7 @@
         </div>
     </nav>
     <section class="px-12 py-12">
-        <h1 class="text-3xl font-bold">ALL PLATS :</h1>
+        <h1 class="text-3xl font-bold">Card</h1>
         @if (session('success'))
             <div class="bg-green-100 border mt-8 border-green-400 text-green-700 px-4 py-3 rounded relative"
                 role="alert">
@@ -140,69 +132,101 @@
                 </span>
             </div>
         @endif
-        <div class="z-1 p-24 flex flex-wrap items-center justify-center">
-            @foreach ($plats as $plat)
-                <div
-                    class=" z-2 flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg">
-                    <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
-                        style="transform: scale(1.5); opacity: 0.1;">
-                        <rect x="159.52" y="175" width="152" height="152" rx="8"
-                            transform="rotate(-45 159.52 175)" fill="white" />
-                        <rect y="107.48" width="152" height="152" rx="8"
-                            transform="rotate(-45 0 107.48)" fill="white" />
-                    </svg>
-                    <div class="relative pt-10 px-10 flex items-center justify-center">
-                        <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                            style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
+        <div class="max-w-md mx-auto mt-16 bg-white rounded-lg overflow-hidden md:max-w-lg border border-gray-400">
+
+            <div class="px-4 py-2 border-b border-gray-200">
+                <h2 class="font-semibold text-gray-800">Your Plats</h2>
+            </div>
+            <div class="flex flex-col divide-y divide-gray-200">
+                @foreach ($cards as $card)
+                    <div class="flex items-center py-4 px-6">
+                        <div>
+                            <form id="plus-form-{{ $card->id }}" action="{{ route('plus', $card->id) }}"
+                                method="POST">
+                                @method('PUT')
+                                @csrf
+                                <button type="submit" class="plus-btn"><i class="fa-solid fa-plus"></i></button>
+                            </form>
+                            <p class="text-gray-700 mr-4">{{ $card->quantity }}</p>
+                            <form id="minus-form-{{ $card->id }}" action="{{ route('minus', $card->id) }}"
+                                method="POST">
+                                @method('PUT')
+                                @csrf
+                                <button type="submit" class="minus-btn"><i class="fa-solid fa-minus"></i></button>
+                            </form>
                         </div>
-                        <img class="relative w-40 rounded-xl" src="{{ asset('images/' . $plat->image) }}"
-                            alt="">
-                    </div>
-                    <div class="relative text-white px-6 pb-6 mt-6">
-                        <span class="block opacity-75 -mb-1">{{ $plat->category->name }}</span>
-                        <div class="flex justify-between gap-4">
-                            <span class="block font-semibold text-xl">{{ $plat->name }}</span>
-                            <span
-                                class="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center">${{ $plat->price }}</span>
+
+                        <img class="w-16 h-16 object-cover rounded" src="{{ asset('images/' . $card->plat->image) }}"
+                            alt="Product Image">
+                        <div class="ml-3">
+                            <h3 class="text-gray-900 font-semibold">{{ $card->plat->name }}</h3>
+                            <p class="">{{ $card->plat->price }}$</p>
                         </div>
-                        <form action="{{ route('AddToCard', $plat->id) }}" method="POST">
+                        <form class="ml-auto py-2 px-4" action="{{ route('cart.plats.delete', $card->id) }}"
+                            method="POST">
                             @csrf
-                            <label for="quantity-input"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose
-                                quantity:</label>
-                            <div class="flex flex-col items-center">
-                                <input type="number" data-input-counter name="quantity"
-                                    class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                    value="1" min="1" required />
-                                <button
-                                    class="text-white mt-4 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><i
-                                        class="fa-solid fa-plus fa-xl"></i></button>
-                            </div>
+                            @method('DELETE')
+                            <button class="ml-auto py-2 px-4 bg-red-500 hover:bg-red-600 text-white rounded-lg">
+                                Remove
+                            </button>
                         </form>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+            <div class="flex items-center justify-between px-6 py-3 bg-gray-100">
+                <h3 class="text-gray-900 font-semibold">Total: <span id="total">{{ $total }}</span>$</h3>
+                <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">
+                    Checkout
+                </button>
+            </div>
         </div>
     </section>
-    <script>
-        function updateOrderCount() {
-            $.ajax({
-                url: "/count",
-                type: "GET",
-                dataType: "json",
-                success: function(response) {
-                    const orderCount = response.orderCount;
-                    $("#orderCount").text(orderCount);
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching order count:", error);
-                }
-            });
-        }
 
-        updateOrderCount();
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.plus-btn').click(function(event) {
+                event.preventDefault();
+                var form = $(this).closest('form');
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function(response) {
+                        var newQuantity = parseInt(form.siblings('p').text()) + 1;
+                        form.siblings('p').text(newQuantity);
+                        $('#total').text(response.total);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+            $('.minus-btn').click(function(event) {
+                event.preventDefault();
+                var form = $(this).closest('form');
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function(response) {
+                        var newQuantity = parseInt(form.siblings('p').text()) - 1;
+                        if (newQuantity >= 1) {
+                            form.siblings('p').text(newQuantity);
+                        } else {}
+                        $('#total').text(response.total);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
     </script>
+
 </body>
+
 
 
 </html>

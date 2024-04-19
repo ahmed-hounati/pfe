@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CardController extends Controller
 {
+
+
     public function getCommands()
     {
         $commands = Card::join('users', 'cards.user_id', '=', 'users.id')
@@ -31,8 +33,11 @@ class CardController extends Controller
         return redirect()->route('getCommands')->with('success', 'Command accepted');
     }
 
-    public function addToCard($id)
+    public function addToCard(Request $request, $id)
     {
+        $request->validate([
+            'quantity' => 'required|int'
+        ]);
         $plat = Plat::findOrFail($id);
 
         $existingCard = Card::where('plat_id', $plat->id)
@@ -46,6 +51,7 @@ class CardController extends Controller
         $card = new Card;
         $card->plat_id = $plat->id;
         $card->user_id = Auth::user()->id;
+        $card->quantity = $request->quantity;
         $card->save();
 
 
@@ -59,28 +65,68 @@ class CardController extends Controller
         return response()->json(['orderCount' => $orderCount], Response::HTTP_OK);
     }
 
-    public function cardPlats()
+
+    public function delete($id)
     {
-        $plats = Card::where('user_id', auth()->id())
+        $card = Card::findOrFail($id);
+        if ($card) {
+            $card->delete();
+        }
+
+
+        return redirect()->route('card')->with('success', 'plat removed from card');
+    }
+
+
+    public function getCard()
+    {
+        $cards = Card::where('user_id', auth()->id())
+            ->with('plat')
+            ->get();
+        $total = 0;
+        foreach ($cards as $card) {
+            $price = $card->plat->price * $card->quantity;
+            $total += $price;
+        }
+        return view('user.card', ['cards' => $cards, 'total' => $total]);
+    }
+
+    public function plus($id)
+    {
+        $card = Card::findOrFail($id);
+        $card->quantity += 1;
+        $card->save();
+        $total = $this->calculateTotal();
+
+        return response()->json(['total' => $total]);
+    }
+
+    public function minus($id)
+    {
+        $card = Card::findOrFail($id);
+        if ($card->quantity > 0) {
+            $card->quantity -= 1;
+            if ($card->quantity >= 1) {
+                $card->save();
+            }
+        }
+        $total = $this->calculateTotal();
+
+        return response()->json(['total' => $total]);
+    }
+
+    private function calculateTotal()
+    {
+        $cards = Card::where('user_id', auth()->id())
             ->with('plat')
             ->get();
 
-        return response()->json($plats);
-    }
-
-    public function delete(Request $request)
-    {
-        $platIds = $request->input('ids');
-        foreach ($platIds as $platId) {
-            $card = Card::where('plat_id', $platId)->first();
-            if ($card) {
-                $card->delete();
-            }
+        $total = 0;
+        foreach ($cards as $card) {
+            $price = $card->plat->price * $card->quantity;
+            $total += $price;
         }
 
-        return response()->json(['message' => 'Plats deleted successfully'], Response::HTTP_OK);
+        return $total;
     }
-
-
-
 }
