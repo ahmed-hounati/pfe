@@ -160,9 +160,7 @@
                             alt="Product Image">
                         <div class="ml-3">
                             <h3 class="text-gray-900 font-semibold">{{ $card->plat->name }}</h3>
-                            <span>
-                                $<p class="total-price">{{ $card->plat->price * $card->quantity }}</p>
-                            </span>
+                            <p class="total-price">{{ $card->plat->price * $card->quantity }}<span>$</span></p>
                         </div>
 
 

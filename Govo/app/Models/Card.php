@@ -13,4 +13,11 @@ class Card extends Model
     {
         return $this->belongsTo(Plat::class);
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_card', 'card_id', 'order_id');
+    }
+
+
 }

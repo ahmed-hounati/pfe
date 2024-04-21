@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreignId('plat_id')->constrained('plats')->onDelete('cascade');
             $table->integer('total');
             $table->integer('quantity')->default(1);
+            $table->enum('status', ['ordered', 'waiting'])->default('waiting');
             $table->timestamps();
         });
     }

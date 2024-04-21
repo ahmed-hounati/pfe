@@ -13,20 +13,26 @@ class OrderController extends Controller
         $cardIdsAsString = explode(',', $cards);
         $cardIdsAsIntegers = array_map('intval', $cardIdsAsString);
         $user_id = Auth::user()->id;
-        foreach ($cardIdsAsIntegers as $cardId) {
-            $order = new Order;
-            $order->user_id = $user_id;
-            $order->card_id = $cardId;
-            $order->save();
-        }
+
+        // Find an existing order for the user, or create a new one if it doesn't exist
+        $order = Order::where('user_id', $user_id)->firstOrCreate([
+            'user_id' => $user_id,
+        ]);
+
+        $order->cards()->syncWithoutDetaching($cardIdsAsIntegers);
+
         return redirect()->route('payment');
     }
+
+
 
     public function getOrders()
     {
         $user = Auth::user()->id;
-        $orders = Order::where('user_id', $user)->get();
+        $orders = Order::with('cards')->where('user_id', $user)->get();
         return view('user.orders', ['orders' => $orders]);
     }
+
+
 
 }
