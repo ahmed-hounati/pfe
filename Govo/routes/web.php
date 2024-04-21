@@ -49,12 +49,16 @@ Route::post('/command/{id}/accept', [CardController::class, 'acceptCommand'])->n
 Route::get('/user/dashboard', [PlatController::class, 'getPlats'])->name('user.dashboard')->middleware('user');
 Route::post('/add/{id}/toCard/', [CardController::class, 'addToCard'])->name('AddToCard')->middleware('user');
 Route::get('/cart/plats', [CardController::class, 'cardPlats'])->name('carPlats')->middleware('user');
-Route::post('/confirm/order', [OrderController::class, 'confirmOrder'])->name('confirmOrder')->middleware('user');
+Route::post('/order/{cards}/confirm', [OrderController::class, 'confirmOrder'])->name('addOrder')->middleware('user');
 Route::delete('/cart/{id}/delete', [CardController::class, 'delete'])->name('cart.plats.delete')->middleware('user');
 Route::get('/count', [CardController::class, 'getOrderCount'])->name('count')->middleware('user');
 
 
 Route::get('/card', [CardController::class, 'getCard'])->name('card')->middleware('user');
+Route::get('/total/{id}', [CardController::class, 'getCardTotal'])->name('cardTotal')->middleware('user');
 Route::put('/card/plus/{id}', [CardController::class, 'plus'])->name('plus')->middleware('user');
 
 Route::put('/card/minus/{id}', [CardController::class, 'minus'])->name('minus')->middleware('user');
+
+
+Route::get('/orders/all', [OrderController::class, 'getOrders'])->name('payment')->middleware('user');

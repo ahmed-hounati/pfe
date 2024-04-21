@@ -16,7 +16,7 @@
                 <div class="container z-1">
                     <div class="flex flex-wrap -mx-3">
                         <div
-                            class="flex flex-col w-full max-w-full px-3 mx-auto lg:mx-0 shrink-0 md:flex-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
+                            class="flex flex-col w-full max-w-full px-12 mx-auto lg:mx-0 shrink-0 md:flex-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
                             <div
                                 class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none lg:py4 rounded-2xl bg-clip-border">
                                 <div class="p-6 pb-0 mb-0">
@@ -74,40 +74,3 @@
 </body>
 
 </html>
-
-<section class="max-w-4xl mt-32 p-6 mx-auto bg-[#F2BD36] rounded-md shadow-md ">
-    <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Login</h2>
-    <form action="">
-        @csrf
-        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-            <div>
-                <label class="text-black dark:text-black" for="emailAddress">Email Address</label>
-                <input id="emailAddress" name="email" type="email"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-40 dark:focus:border-blue-500 focus:outline-none focus:ring">
-
-            </div>
-
-            <div>
-                <label class="text-black dark:text-black" for="password">Password</label>
-                <input id="password" name="password" type="password"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                @error('password')
-                    <span class="text-red-500 mt-2 text-sm">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="flex justify-end mt-6">
-            <button
-                class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
-        </div>
-
-        <div class="">
-            <label for="remember" class="block">
-                <input type="checkbox" name="remember"> Remember Me
-            </label>
-        </div>
-    </form>
-</section>

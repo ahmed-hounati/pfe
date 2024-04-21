@@ -44,6 +44,10 @@ class CardController extends Controller
             ->where('user_id', Auth::user()->id)
             ->exists();
 
+        $total = 0;
+
+        $total = $request->quantity * $plat->price;
+
         if ($existingCard) {
             return redirect()->route('user.dashboard')->with('error', $plat->name . ' is already in your cart');
         }
@@ -52,6 +56,7 @@ class CardController extends Controller
         $card->plat_id = $plat->id;
         $card->user_id = Auth::user()->id;
         $card->quantity = $request->quantity;
+        $card->total = $total;
         $card->save();
 
 
@@ -91,29 +96,32 @@ class CardController extends Controller
         return view('user.card', ['cards' => $cards, 'total' => $total]);
     }
 
+
     public function plus($id)
     {
         $card = Card::findOrFail($id);
         $card->quantity += 1;
+        $card->total = $card->plat->price * $card->quantity;
         $card->save();
         $total = $this->calculateTotal();
 
-        return response()->json(['total' => $total]);
+        return response()->json(['total' => $total, 'quantity' => $card->quantity, 'plat_price' => $card->plat->price]);
     }
 
     public function minus($id)
     {
         $card = Card::findOrFail($id);
-        if ($card->quantity > 0) {
+        if ($card->quantity > 1) {
             $card->quantity -= 1;
-            if ($card->quantity >= 1) {
-                $card->save();
-            }
+            $card->total = $card->plat->price * $card->quantity;
+            $card->save();
         }
         $total = $this->calculateTotal();
 
-        return response()->json(['total' => $total]);
+        return response()->json(['total' => $total, 'quantity' => $card->quantity, 'plat_price' => $card->plat->price]);
     }
+
+
 
     private function calculateTotal()
     {
@@ -128,5 +136,11 @@ class CardController extends Controller
         }
 
         return $total;
+    }
+
+    public function getCardTotal($id)
+    {
+        $card = Card::findOrFail($id);
+        return response()->json(['total' => $card->total]);
     }
 }

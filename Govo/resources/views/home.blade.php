@@ -16,8 +16,7 @@
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" aria-label="Company" title="Company" class="inline-flex items-center mr-8">
-                            <img src="https://cdn.dribbble.com/users/544003/screenshots/16033104/media/4547b5deb38d689016d132705f909650.jpg?resize=1000x750&vertical=center"
-                                class="w-8 text-teal-accent-400" alt="logo">
+                            <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
                             <li><a href="/categories" aria-label="Our product" title="Our product"
@@ -125,31 +124,17 @@
                             Glovo offers an efficient and varied service for fast delivery.
                         </p>
                     </div>
-                    <div>
-                        <a href="/about" aria-label=""
-                            class="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800">
-                            Learn more
-                            <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
-                                <path
-                                    d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
                 </div>
                 <div class="flex items-center justify-center -mx-4 lg:pl-8">
                     <div class="flex flex-col items-end px-3">
                         <img class="object-cover mb-6 rounded shadow-lg h-28 sm:h-48 xl:h-56 w-28 sm:w-48 xl:w-56"
-                            src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                            alt="" />
+                            src="{{ asset('images/spagitti.png') }}" alt="" />
                         <img class="object-cover w-20 h-20 rounded shadow-lg sm:h-32 xl:h-40 sm:w-32 xl:w-40"
-                            src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                            alt="" />
+                            src="{{ asset('images/zlafa.png') }}" alt="" />
                     </div>
                     <div class="px-3">
                         <img class="object-cover w-40 h-40 rounded shadow-lg sm:h-64 xl:h-80 sm:w-64 xl:w-80"
-                            src="https://images.pexels.com/photos/3182739/pexels-photo-3182739.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500"
-                            alt="" />
+                            src="{{ asset('images/burgger.png') }}" alt="" />
                     </div>
                 </div>
             </div>
@@ -159,18 +144,7 @@
         <h1 class="text-center text-3xl font-bold">Best Plats</h1>
         <div class="flex justify-center items-center h-screen">
             {{-- @foreach ($plats as $plat) --}}
-            <a href="#" class="group relative block overflow-hidden">
-                <button
-                    class="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-                    <span class="sr-only">Wishlist</span>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="h-4 w-4">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                    </svg>
-                </button>
-
+            <div class="group relative block overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80"
                     alt=""
                     class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
@@ -189,80 +163,10 @@
                         </button>
                     </form>
                 </div>
-            </a>
+            </div>
             {{-- @endforeach --}}
         </div>
 
-    </section>
-    <section>
-        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-                <h2
-                    class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                    Opportunities
-                </h2>
-            </div>
-            <div
-                class="grid max-w-md gap-10 row-gap-8 lg:max-w-screen-lg sm:row-gap-10 lg:grid-cols-3 xl:max-w-screen-lg sm:mx-auto">
-                <div class="flex flex-col transition duration-300 bg-white rounded shadow-sm hover:shadow">
-                    <div class="relative w-full h-48">
-                        <img src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                            class="object-cover w-full h-full rounded-t" alt="Plan" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow p-8 border border-t-0 rounded-b">
-                        <div>
-                            <div class="mt-1 mb-4 mr-1 text-3xl font-bold sm:text-3xl">To become partner</div>
-                            <p class="text-sm text-gray-900">
-                                Grow with Glovo! Boost sales and access new opportunities thanks to our technology and
-                                our user base!
-                            </p>
-                        </div>
-                        <a href="/register"
-                            class="text-black inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
-                            Register
-                        </a>
-                    </div>
-                </div>
-                <div class="flex flex-col transition duration-300 bg-white rounded shadow-sm hover:shadow">
-                    <div class="relative w-full h-48">
-                        <img src="https://images.pexels.com/photos/3183181/pexels-photo-3183181.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                            class="object-cover w-full h-full rounded-t" alt="Plan" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow p-8 border border-t-0 rounded-b">
-                        <div>
-                            <div class="mt-1 mb-4 mr-1 text-3xl font-bold sm:text-3xl">Become a courier</div>
-                            <p class="text-sm text-gray-900">
-                                You are the boss! Deliver with Glovo to earn competitive income with complete
-                                flexibility and freedom.
-                            </p>
-                        </div>
-                        <a href="/register"
-                            class="text-black inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
-                            Register
-                        </a>
-                    </div>
-                </div>
-                <div class="flex flex-col transition duration-300 bg-white rounded shadow-sm hover:shadow">
-                    <div class="relative w-full h-48">
-                        <img src="https://images.pexels.com/photos/3182743/pexels-photo-3182743.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                            class="object-cover w-full h-full rounded-t" alt="Plan" />
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow p-8 border border-t-0 rounded-b">
-                        <div>
-                            <div class="mt-1 mb-4 mr-1 text-3xl font-bold sm:text-3xl">Job</div>
-                            <p class="text-sm text-gray-900">
-                                Are you looking for a new challenge? If you demonstrate ambition and humility and enjoy
-                                working in a team, contact us!
-                            </p>
-                        </div>
-                        <a href="/register"
-                            class="text-black inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
-                            Register
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
     <footer>
         <div class="relative mt-16 bg-[#F2BD36]">
@@ -273,24 +177,12 @@
                 <div class="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
                     <div class="md:max-w-md lg:col-span-2">
                         <a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
-                            <svg class="w-8 text-teal-accent-400" viewBox="0 0 24 24" stroke-linejoin="round"
-                                stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor"
-                                fill="none">
-                                <rect x="3" y="1" width="7" height="12"></rect>
-                                <rect x="3" y="17" width="7" height="6"></rect>
-                                <rect x="14" y="1" width="7" height="6"></rect>
-                                <rect x="14" y="11" width="7" height="12"></rect>
-                            </svg>
-                            <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Company</span>
+                            <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Govo</span>
                         </a>
                         <div class="mt-4 lg:max-w-sm">
-                            <p class="text-sm text-deep-purple-50">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam.
-                            </p>
                             <p class="mt-4 text-sm text-deep-purple-50">
-                                Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                                explicabo.
+                                Grow with Glovo! Boost sales and access new opportunities thanks to our technology and
+                                our user base!
                             </p>
                         </div>
                     </div>
@@ -396,7 +288,7 @@
                 <div
                     class="flex flex-col justify-between pt-5 pb-10 border-t border-deep-purple-accent-200 sm:flex-row">
                     <p class="text-sm text-gray-100">
-                        © Copyright 2020 Lorem Inc. All rights reserved.
+                        © Copyright 2024 Govo Inc. All rights reserved.
                     </p>
                     <div class="flex items-center mt-4 space-x-4 sm:mt-0">
                         <a href="/"

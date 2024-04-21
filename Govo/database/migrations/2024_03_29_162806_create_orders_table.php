@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('plat_id')->constrained('plats')->onDelete('cascade');
-            $table->enum('status', ['pending', 'in_progress', 'delivered', 'canceled'])->default('pending');
+            $table->foreignId('card_id')->constrained('cards')->onDelete('cascade');
+            $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending');
             $table->timestamps();
         });
     }
