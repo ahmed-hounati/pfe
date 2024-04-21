@@ -40,7 +40,7 @@ class CardController extends Controller
         ]);
         $plat = Plat::findOrFail($id);
 
-        $existingCard = Card::where('plat_id', $plat->id)
+        $existingCard = Card::where('plat_id', $plat->id)->where('status', 'waiting')
             ->where('user_id', Auth::user()->id)
             ->exists();
 
@@ -66,7 +66,7 @@ class CardController extends Controller
     }
     public function getOrderCount()
     {
-        $orderCount = Card::where('user_id', Auth::user()->id)->count();
+        $orderCount = Card::where('user_id', Auth::user()->id)->where('status', 'waiting')->count();
         return response()->json(['orderCount' => $orderCount], Response::HTTP_OK);
     }
 
@@ -86,6 +86,7 @@ class CardController extends Controller
     public function getCard()
     {
         $cards = Card::where('user_id', auth()->id())
+            ->where('status', 'waiting')
             ->with('plat')
             ->get();
         $total = 0;

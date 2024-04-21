@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function confirmOrder(Request $request, $cards)
+    public function confirmOrder($cards)
     {
         $cardIdsAsString = explode(',', $cards);
         $cardIdsAsIntegers = array_map('intval', $cardIdsAsString);
+
+        foreach ($cardIdsAsIntegers as $id) {
+            $card = Card::findOrFail($id);
+            $card->status = 'ordered';
+            $card->save();
+        }
         $user_id = Auth::user()->id;
 
-        // Find an existing order for the user, or create a new one if it doesn't exist
         $order = Order::where('user_id', $user_id)->firstOrCreate([
             'user_id' => $user_id,
         ]);
