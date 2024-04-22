@@ -29,12 +29,9 @@
                             <li><a href="/categories" aria-label="Our product" title="Our product"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
-                            <li><a href="/Opportunities" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Opportunities</a>
+                            <li><a href="/user/dashboard" aria-label="Product pricing" title="Product pricing"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Plats</a>
                             </li>
-                            <li><a href="/about" aria-label="About us" title="About us"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">About
-                                    us</a></li>
                         </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -124,7 +121,7 @@
         </div>
     </nav>
     <section class="px-12 py-12">
-        <h1 class="text-3xl font-bold">ALL PLATS :</h1>
+        <h1 class="text-3xl font-bold">PLATS :</h1>
         @if (session('success'))
             <div class="bg-green-100 border mt-8 border-green-400 text-green-700 px-4 py-3 rounded relative"
                 role="alert">

@@ -279,18 +279,15 @@
                     </svg>
                 </div>
                 <div class="ticket-body__title">
-                    <h1 class="alfa">100</h1>
+                    <h1 class="alfa">{{ $plats }}</h1>
                     <h2>Plates</h2>
-                    <h3>Food Festival</h3>
+                    <h3>Froom GOVO</h3>
                 </div>
                 <div class="ticket-body__events">
                     <ul>
-                        <li>30 Celebrity Chefs</li>
-                        <li>100 Stalls</li>
-                        <li>Cooking Demos</li>
-                        <li>Wine Tasting</li>
-                        <li>Live Entertainmaent</li>
-                        <li>4 Licensed Bars</li>
+                        @foreach ($order->cards as $card)
+                            <li>{{ $card->plat->name }}</li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="ticket-body__date">

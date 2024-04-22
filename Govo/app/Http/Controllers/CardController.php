@@ -126,7 +126,7 @@ class CardController extends Controller
 
     private function calculateTotal()
     {
-        $cards = Card::where('user_id', auth()->id())
+        $cards = Card::where('user_id', auth()->id())->where('status', 'waiting')
             ->with('plat')
             ->get();
 

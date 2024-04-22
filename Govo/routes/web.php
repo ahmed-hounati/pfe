@@ -62,3 +62,4 @@ Route::put('/card/minus/{id}', [CardController::class, 'minus'])->name('minus')-
 
 
 Route::get('/orders/all', [OrderController::class, 'getOrders'])->name('payment')->middleware('user');
+Route::get('/ticket/{id}', [OrderController::class, 'ticket'])->name('ticket')->middleware('user');

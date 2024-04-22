@@ -29,12 +29,9 @@
                             <li><a href="/categories" aria-label="Our product" title="Our product"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
-                            <li><a href="/Opportunities" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Opportunities</a>
+                            <li><a href="/user/dashboard" aria-label="Product pricing" title="Product pricing"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Plats</a>
                             </li>
-                            <li><a href="/about" aria-label="About us" title="About us"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">About
-                                    us</a></li>
                         </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -116,7 +113,6 @@
         </div>
     </nav>
     <section class="px-12 py-12">
-        <h1 class="text-3xl font-bold">Card</h1>
         @if (session('success'))
             <div class="bg-green-100 border mt-8 border-green-400 text-green-700 px-4 py-3 rounded relative"
                 role="alert">
@@ -160,7 +156,10 @@
                             alt="Product Image">
                         <div class="ml-3">
                             <h3 class="text-gray-900 font-semibold">{{ $card->plat->name }}</h3>
-                            <p class="total-price">{{ $card->plat->price * $card->quantity }}<span>$</span></p>
+                            <div class="flex flex-row">
+                                <p class="total-price">{{ $card->plat->price * $card->quantity }}</p>
+                                <span>$</span>
+                            </div>
                         </div>
 
 
@@ -169,7 +168,7 @@
                             @csrf
                             @method('DELETE')
                             <button class="ml-auto py-2 px-4 bg-red-500 hover:bg-red-600 text-white rounded-lg">
-                                Remove
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                         </form>
                     </div>
@@ -177,12 +176,15 @@
             </div>
             <div class="flex items-center justify-between px-6 py-3 bg-gray-100">
                 <h3 class="text-gray-900 font-semibold">Total: <span id="total">{{ $total }}</span>$</h3>
-                <form action="{{ route('addOrder', ['cards' => implode(',', $cards->pluck('id')->toArray())]) }}"
-                    method="POST">
-                    @csrf
-                    <button type="submit"
-                        class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">Order</button>
-                </form>
+                @if ($cards->isNotEmpty())
+                    <form action="{{ route('addOrder', ['cards' => implode(',', $cards->pluck('id')->toArray())]) }}"
+                        method="POST">
+                        @csrf
+                        <button type="submit"
+                            class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">Confirm
+                            Orders</button>
+                    </form>
+                @endif
 
 
             </div>
