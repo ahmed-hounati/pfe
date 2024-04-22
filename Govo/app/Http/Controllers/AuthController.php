@@ -24,12 +24,20 @@ class AuthController extends Controller
             'password' => 'required|min:8',
             'role' => 'required',
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+        } else {
+            $imageName = '';
+        }
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->role = $request->role;
+        $user->image = $imageName;
         $user->save();
         return redirect()->route('loginForm');
     }
@@ -75,7 +83,7 @@ class AuthController extends Controller
             if (Auth::user()->role === "admin") {
                 return redirect()->route('admin.dashboard');
             } else {
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.categories');
             }
         } else {
             return back()->withErrors([
@@ -95,4 +103,11 @@ class AuthController extends Controller
         auth()->logout();
         return redirect()->route('home');
     }
+
+    public function getRest()
+    {
+        $resto = User::All()->where('role', 'resto');
+        return view('user.resto', ['restos' => $resto]);
+    }
+
 }

@@ -46,6 +46,9 @@ Route::delete('/plats/{id}/delete', [PlatController::class, 'destroy'])->name('p
 Route::get('/commands', [CardController::class, 'getCommands'])->name('getCommands')->middleware('resto');
 Route::post('/command/{id}/accept', [CardController::class, 'acceptCommand'])->name('command.accept')->middleware('resto');
 
+Route::get('/Restorents', [AuthController::class, 'getRest'])->name('allResto');
+Route::get('/category/{id}/plats', [PlatController::class, 'categoryPlats'])->name('categoryDetails')->middleware('user');
+Route::get('/user/categories', [CategoriesController::class, 'AllCategories'])->name('user.categories')->middleware('user');
 Route::get('/user/dashboard', [PlatController::class, 'getPlats'])->name('user.dashboard')->middleware('user');
 Route::post('/add/{id}/toCard/', [CardController::class, 'addToCard'])->name('AddToCard')->middleware('user');
 Route::get('/cart/plats', [CardController::class, 'cardPlats'])->name('carPlats')->middleware('user');

@@ -12,6 +12,12 @@ class CategoriesController extends Controller
         $categories = Category::all();
         return view('categories', ['categories' => $categories]);
     }
+
+    public function AllCategories()
+    {
+        $categories = Category::all();
+        return view('user.categorie', ['categories' => $categories]);
+    }
     public function create()
     {
         return view('categories.create');
@@ -19,11 +25,19 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'require|unique',
+            'name' => 'required|unique',
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+        } else {
+            $imageName = '';
+        }
 
         $category = new Category;
         $category->name = $request->name;
+        $category->image = $imageName;
 
         $category->save();
         return redirect()->route('categories.all')->with('success', 'Category created successfully');
@@ -45,4 +59,8 @@ class CategoriesController extends Controller
         $category->delete();
         return redirect()->route('categories.all')->with('success', 'Category deleted successfully!');
     }
+
+
+
+
 }

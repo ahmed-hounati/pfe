@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CardController extends Controller
 {
-
-
     public function getCommands()
     {
         $commands = Card::join('users', 'cards.user_id', '=', 'users.id')
