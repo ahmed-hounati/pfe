@@ -26,15 +26,16 @@
                             <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/categories" aria-label="Our product" title="Our product"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
-                            </li>
-                            <li><a href="/Restorents" aria-label="Our product" title="Our product"
+                            <li><a href="/Restorents"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
                                     Restorents</a>
                             </li>
-                            <li><a href="/user/dashboard" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Plats</a>
+                            <li><a href="/user/categories"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
+                            </li>
+                            <li><a href="/user/dashboard"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Plats</a>
                             </li>
                         </ul>
                     </div>
@@ -141,15 +142,14 @@
                 </span>
             </div>
         @endif
-        <div class="">
+        <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             @foreach ($restos as $resto)
                 <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                     <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
-                        style="background-image: url(https://images.unsplash.com/photo-1521903062400-b80f2cb8cb9d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80)">
+                        style="background-image: url({{ asset('images/' . $resto->image) }})">
                     </div>
-                    <div
-                        class="w-56 -mt-10 overflow-hidden text-center bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
-                        <a href="{{ route('categoryDetails', $resto->id) }}"
+                    <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
+                        <a href="{{ route('restoPlats', $resto->id) }}"
                             class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
                             {{ $resto->name }}</a>
                     </div>

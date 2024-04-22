@@ -47,6 +47,7 @@ Route::get('/commands', [CardController::class, 'getCommands'])->name('getComman
 Route::post('/command/{id}/accept', [CardController::class, 'acceptCommand'])->name('command.accept')->middleware('resto');
 
 Route::get('/Restorents', [AuthController::class, 'getRest'])->name('allResto');
+Route::get('/Restorents/{id}/plats', [PlatController::class, 'restoPlats'])->name('restoPlats');
 Route::get('/category/{id}/plats', [PlatController::class, 'categoryPlats'])->name('categoryDetails')->middleware('user');
 Route::get('/user/categories', [CategoriesController::class, 'AllCategories'])->name('user.categories')->middleware('user');
 Route::get('/user/dashboard', [PlatController::class, 'getPlats'])->name('user.dashboard')->middleware('user');

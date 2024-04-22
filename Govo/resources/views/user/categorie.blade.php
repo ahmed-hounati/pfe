@@ -26,15 +26,15 @@
                             <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/categories" aria-label="Our product" title="Our product"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
-                            </li>
-                            <li><a href="/Restorents" aria-label="Our product" title="Our product"
+                            <li><a href="/Restorents"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
                                     Restorents</a>
                             </li>
-                            <li><a href="/user/dashboard" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Plats</a>
+                            <li><a href="/user/categories"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
+                            </li>
+                            <li><a href="/user/dashboard"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All Plats</a>
                             </li>
                         </ul>
                     </div>
@@ -141,7 +141,7 @@
                 </span>
             </div>
         @endif
-        <div class="">
+        <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             @foreach ($categories as $category)
                 <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                     <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"

@@ -26,11 +26,16 @@
                             <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/categories" aria-label="Our product" title="Our product"
+                            <li><a href="/Restorents"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Restorents</a>
+                            </li>
+                            <li><a href="/user/categories"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
-                            <li><a href="/user/dashboard" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Plats</a>
+                            <li><a href="/user/dashboard"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Plats</a>
                             </li>
                         </ul>
                     </div>
@@ -42,6 +47,14 @@
                                     class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                     aria-label="Logout" title="Logout">Logout</button>
                             </form>
+                        </li>
+                        <li>
+                            <a href="{{ route('card') }}">
+                                <i class="fa-solid fa-cart-shopping fa-lg text-white"></i>
+                                <span id="orderCount"
+                                    class="inline-block px-2 py-1 text-sm font-semibold leading-tight text-white bg-blue-500 rounded-full">
+                                </span>
+                            </a>
                         </li>
                     </ul>
 

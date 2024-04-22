@@ -39,7 +39,14 @@ class AuthController extends Controller
         $user->role = $request->role;
         $user->image = $imageName;
         $user->save();
-        return redirect()->route('loginForm');
+        Auth::login($user);
+        if ($user->role === "resto") {
+            return redirect()->route('resto.dashboard');
+        } elseif ($user->role === "admin") {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('allResto');
+        }
     }
 
     public function getLoginForm()
@@ -83,7 +90,7 @@ class AuthController extends Controller
             if (Auth::user()->role === "admin") {
                 return redirect()->route('admin.dashboard');
             } else {
-                return redirect()->route('user.categories');
+                return redirect()->route('allResto');
             }
         } else {
             return back()->withErrors([

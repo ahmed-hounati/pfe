@@ -23,7 +23,8 @@
                                     <h4 class="font-bold">Welcome!</h4>
                                 </div>
                                 <div class="flex-auto p-6">
-                                    <form action="{{ route('register') }}" method="post" role="form">
+                                    <form action="{{ route('register') }}" method="post" enctype="multipart/form-data"
+                                        role="form">
                                         @csrf
                                         <div class="mb-8">
                                             <span class="text-black dark:text-black">Chose ur Role</span>
@@ -41,6 +42,17 @@
                                                     <span class="ml-6 text-black">Restaurant</span>
                                                 </label>
                                             </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <input type="file"
+                                                class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+                                                placeholder="image" aria-label="image" name="image"
+                                                aria-describedby="email-addon" />
+                                            @error('image')
+                                                <span class="text-red-500 mt-2 text-sm">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="mb-4">
                                             <input type="text"
