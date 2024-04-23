@@ -17,6 +17,16 @@ class OrderCardController extends Controller
 
         return redirect()->route('getCommands')->with('success', 'Order Confirmed');
     }
+    public function cancelOrder($id)
+    {
+        $orderCard = OrderCard::findOrFail($id);
+
+        $orderCard->status = 'canceled';
+        $orderCard->save();
+
+        return redirect()->route('getCommands')->with('success', 'Order canceled');
+    }
+
 
     public function getCommands()
     {

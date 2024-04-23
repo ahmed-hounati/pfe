@@ -12,4 +12,5 @@ class Plat extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
 }

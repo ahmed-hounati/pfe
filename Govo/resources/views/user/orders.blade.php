@@ -37,6 +37,10 @@
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
                                     Plats</a>
                             </li>
+                            <li><a href="/orders/all"
+                                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                My orders</a>
+                        </li>
                         </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -174,21 +178,34 @@
                                             class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                                             {{ $card->total }}$
                                         </div>
-                                        <p
-                                            class="text-sm ml-4 font-medium text-blue-600 hover:underline dark:text-blue-500">
-                                            {{ $card->status }}
-                                        </p>
+                                        @if ($card->status == 'pending')
+                                            <p
+                                                class="text-sm mx-4 font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                                {{ $card->status }}
+                                            </p>
+                                        @endif
+                                        @if ($card->status == 'canceled')
+                                            <p
+                                                class="text-sm mx-4 font-medium text-red-600 hover:underline dark:text-red-500">
+                                                {{ $card->status }}
+                                            </p>
+                                        @endif
+                                        @if ($card->status == 'confirmed')
+                                            <p
+                                                class="text-sm mx-4 font-medium text-green-600 hover:underline dark:text-green-500">
+                                                {{ $card->status }}
+                                            </p>
+                                            <div class="flex justify-center items-center">
+                                                <a href="{{ route('ticket', $card->id) }}"
+                                                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Ticket</a>
+                                            </div>
+                                        @endif
+
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
-                    @if ($order->status == 'confirmed')
-                        <div class="flex justify-center items-center">
-                            <a href="{{ route('ticket', $order->id) }}"
-                                class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Ticket</a>
-                        </div>
-                    @endif
                 </div>
             @endforeach
         </div>

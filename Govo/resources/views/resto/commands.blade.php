@@ -19,19 +19,24 @@
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" aria-label="Company" title="Company" class="inline-flex items-center mr-8">
-                            <img src="https://cdn.dribbble.com/users/544003/screenshots/16033104/media/4547b5deb38d689016d132705f909650.jpg?resize=1000x750&vertical=center"
-                                class="w-8 text-teal-accent-400" alt="logo">
+                            <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/categories" aria-label="Our product" title="Our product"
+                            <li><a href="/Restorents"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Restorents</a>
+                            </li>
+                            <li><a href="/user/categories"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
-                            <li><a href="/Opportunities" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Opportunities</a>
+                            <li><a href="/user/dashboard"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Plats</a>
                             </li>
-                            <li><a href="/about" aria-label="About us" title="About us"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">About
-                                    us</a></li>
+                            <li><a href="/orders/all"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                    My orders</a>
+                            </li>
                         </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -211,6 +216,17 @@
                                                         @csrf
                                                         <button
                                                             class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirm</button>
+                                                    </form>
+                                                </td>
+                                            @endif
+                                            @if ($command->status == 'pending')
+                                                <td
+                                                    class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                    <form method="POST"
+                                                        action="{{ route('command.cancel', $command->id) }}">
+                                                        @csrf
+                                                        <button
+                                                            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Cancel</button>
                                                     </form>
                                                 </td>
                                             @endif

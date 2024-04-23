@@ -24,5 +24,11 @@ class Card extends Model
         return $this->belongsToMany(Order::class, 'order_cards', 'card_id', 'order_id');
     }
 
+    public function scopeWithRestoName($query)
+    {
+        return $query->join('users', 'cards.resto_id', '=', 'users.id')
+            ->select('cards.*', 'users.name as resto_name');
+    }
+
 
 }

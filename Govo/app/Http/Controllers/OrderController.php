@@ -34,15 +34,6 @@ class OrderController extends Controller
         return redirect()->route('payment');
     }
 
-
-    public function ticket($id)
-    {
-        $order = Order::findOrFail($id);
-        $cardCount = $order->cards()->count();
-
-        return view('user.ticket', ['order' => $order, 'plats' => $cardCount]);
-    }
-
     public function getOrders()
     {
         $user = Auth::user()->id;

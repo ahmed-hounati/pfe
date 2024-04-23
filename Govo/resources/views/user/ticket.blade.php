@@ -279,28 +279,23 @@
                     </svg>
                 </div>
                 <div class="ticket-body__title">
-                    <h1 class="alfa">{{ $plats }}</h1>
                     <h2>Plates</h2>
                     <h3>Froom GOVO</h3>
                 </div>
                 <div class="ticket-body__events">
                     <ul>
-                        @foreach ($order->cards as $card)
-                            <li>{{ $card->plat->name }}</li>
-                        @endforeach
+                        <li>{{ $card->plat->name }} x {{ $card->quantity }}</li>
                     </ul>
                 </div>
                 <div class="ticket-body__date">
                     <div class="box-date">
-                        <h2 class="alfa">21-23</h2>
-                        <h3>November</h3>
-                        <h2 class="alfa">2021</h2>
+                        <h2 class="alfa">30</h2>
+                        <h3>APRIL</h3>
+                        <h2 class="alfa">2024</h2>
                     </div>
 
                     <div class="box-venue">
-                        <h3>Victoria</h3>
-                        <h2 class="alfa">Park</h2>
-                        <h3>Auckland</h3>
+                        <h2 class="alfa">{{ $card->resto_name }}</h2>
                     </div>
 
                 </div>

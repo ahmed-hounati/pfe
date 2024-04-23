@@ -45,7 +45,8 @@ Route::put('/plats/{id}/update', [PlatController::class, 'update'])->name('updat
 Route::delete('/plats/{id}/delete', [PlatController::class, 'destroy'])->name('plats.destroy')->middleware('resto');
 
 Route::get('/commands', [OrderCardController::class, 'getCommands'])->name('getCommands')->middleware('resto');
-Route::post('/command/{id}/accept', [OrderCardController::class, 'confirmOrder'])->name('command.accept')->middleware('resto');
+Route::post('/command/accept/{id}', [OrderCardController::class, 'confirmOrder'])->name('command.accept')->middleware('resto');
+Route::post('/command/cancel/{id}', [OrderCardController::class, 'cancelOrder'])->name('command.cancel')->middleware('resto');
 
 Route::get('/Restorents', [AuthController::class, 'getRest'])->name('allResto');
 Route::get('/Restorents/{id}/plats', [PlatController::class, 'restoPlats'])->name('restoPlats');
@@ -67,4 +68,4 @@ Route::put('/card/minus/{id}', [CardController::class, 'minus'])->name('minus')-
 
 
 Route::get('/orders/all', [OrderController::class, 'getOrders'])->name('payment')->middleware('user');
-Route::get('/ticket/{id}', [OrderController::class, 'ticket'])->name('ticket')->middleware('user');
+Route::get('/ticket/{id}', [CardController::class, 'ticket'])->name('ticket')->middleware('user');

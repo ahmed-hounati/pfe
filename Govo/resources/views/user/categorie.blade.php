@@ -34,7 +34,12 @@
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
                             <li><a href="/user/dashboard"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All Plats</a>
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Plats</a>
+                            </li>
+                            <li><a href="/orders/all"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                    My orders</a>
                             </li>
                         </ul>
                     </div>

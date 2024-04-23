@@ -16,19 +16,24 @@
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" aria-label="Company" title="Company" class="inline-flex items-center mr-8">
-                            <img src="https://cdn.dribbble.com/users/544003/screenshots/16033104/media/4547b5deb38d689016d132705f909650.jpg?resize=1000x750&vertical=center"
-                                class="w-8 text-teal-accent-400" alt="logo">
+                            <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/categories" aria-label="Our product" title="Our product"
+                            <li><a href="/Restorents"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Restorents</a>
+                            </li>
+                            <li><a href="/user/categories"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
-                            <li><a href="/Opportunities" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Opportunities</a>
+                            <li><a href="/user/dashboard"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
+                                    Plats</a>
                             </li>
-                            <li><a href="/about" aria-label="About us" title="About us"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">About
-                                    us</a></li>
+                            <li><a href="/orders/all"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                    My orders</a>
+                            </li>
                         </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">

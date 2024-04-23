@@ -134,4 +134,10 @@ class CardController extends Controller
         $card = Card::findOrFail($id);
         return response()->json(['total' => $card->total]);
     }
+
+    public function ticket($id)
+    {
+        $card = Card::withRestoName()->findOrFail($id);
+        return view('user.ticket', ['card' => $card]);
+    }
 }
