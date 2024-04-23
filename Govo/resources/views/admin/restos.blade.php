@@ -162,39 +162,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($commands as $command)
+                                    @foreach ($restos as $user)
                                         <tr>
                                             <td
                                                 class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                                 <div class="flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('images/' . $command->card->user->image) }}"
+                                                        <img src="{{ asset('images/' . $user->image) }}"
                                                             class="inline-flex items-center justify-center mr-4 text-sm text-black transition-all duration-200 ease-in-out h-9 w-9 rounded-xl"
                                                             alt="user" />
                                                     </div>
                                                     <div class="flex flex-col justify-center">
                                                         <h6 class="mb-0 text-sm leading-normal text-black">
-                                                            {{ $command->card->user->name }}</h6>
+                                                            {{ $user->name }}</h6>
                                                         <p
                                                             class="mb-0 text-xs leading-tight text-black dark:opacity-80 text-slate-400">
-                                                            {{ $command->card->user->email }}</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td
-                                                class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                                <div class="flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('images/' . $command->card->plat->image) }}"
-                                                            class="inline-flex items-center justify-center mr-4 text-sm text-black transition-all duration-200 ease-in-out h-9 w-9 rounded-xl"
-                                                            alt="user" />
-                                                    </div>
-                                                    <div class="flex flex-col justify-center">
-                                                        <h6 class="mb-0 text-sm leading-normal text-black">
-                                                            {{ $command->card->plat->name }}</h6>
-                                                        <p
-                                                            class="mb-0 text-xs leading-tight text-black dark:opacity-80 text-slate-400">
-                                                            x{{ $command->card->quantity }}</p>
+                                                            {{ $user->email }}</p>
                                                     </div>
                                                 </div>
                                             </td>
@@ -205,21 +188,8 @@
                                             </td>
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                                <span
-                                                    class="text-xs font-semibold leading-tight text-black text-slate-400">{{ $command->card->created_at }}</span>
                                             </td>
-                                            @if ($command->status == 'pending')
-                                                <td
-                                                    class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                                                    <form method="POST"
-                                                        action="{{ route('command.accept', $command->id) }}">
-                                                        @csrf
-                                                        <button
-                                                            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirm</button>
-                                                    </form>
-                                                </td>
-                                            @endif
-                                            @if ($command->status == 'pending')
+                                            {{-- @if ($user->baned)
                                                 <td
                                                     class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                                                     <form method="POST"
@@ -229,7 +199,7 @@
                                                             class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Cancel</button>
                                                     </form>
                                                 </td>
-                                            @endif
+                                            @endif --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

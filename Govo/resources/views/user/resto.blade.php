@@ -38,9 +38,9 @@
                                     Plats</a>
                             </li>
                             <li><a href="/orders/all"
-                                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
-                                My orders</a>
-                        </li>
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                    My orders</a>
+                            </li>
                         </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -146,7 +146,25 @@
                 </span>
             </div>
         @endif
-        <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <form class="max-w-md mx-auto" action="{{ route('resto.search') }}" method="get">
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input type="search" name="title" id="searchInput"
+                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+                    placeholder="Search" required />
+                <button
+                    class="text-white absolute end-2.5 bottom-2.5 bg-[#F2BD36] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
+            </div>
+        </form>
+
+        <div id="searchResults" class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             @foreach ($restos as $resto)
                 <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                     <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
@@ -178,6 +196,49 @@
         }
 
         updateOrderCount();
+
+        function fetchSearchResults(query) {
+            fetch(`/search?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    displaySearchResults(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching search results:', error);
+                });
+        }
+
+        function displaySearchResults(results) {
+            const searchResultsDiv = document.getElementById('searchResults');
+            searchResultsDiv.innerHTML = '';
+
+            results.forEach(resto => {
+                const resultCard = document.createElement('div');
+                resultCard.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'w-full', 'max-w-sm',
+                    'mx-auto');
+
+                resultCard.innerHTML = `
+            <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
+                style="background-image: url(${resto.image})">
+            </div>
+            <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64">
+                <a href="/restoPlats/${resto.id}"
+                    class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
+                    ${resto.name}
+                </a>
+            </div>
+        `;
+
+                searchResultsDiv.appendChild(resultCard);
+            });
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value;
+            fetchSearchResults(query);
+        });
     </script>
 </body>
 

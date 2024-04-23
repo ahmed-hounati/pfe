@@ -107,4 +107,10 @@ class PlatController extends Controller
         $plats = Plat::All()->where('resto_id', $id);
         return view('user.dashboard', ['plats' => $plats]);
     }
+
+    public function adminPlats()
+    {
+        $plats = Plat::All();
+        return view('admin.plats', ['plats' => $plats]);
+    }
 }

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Card;
-use App\Models\Plat;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -115,6 +112,26 @@ class AuthController extends Controller
     {
         $resto = User::All()->where('role', 'resto');
         return view('user.resto', ['restos' => $resto]);
+    }
+
+    public function search(Request $request)
+    {
+        $input = $request->input('title');
+        $restos = User::where('name', 'like', '%' . $input . '%')->where('role', 'resto')->get();
+
+        return response()->json($restos);
+    }
+
+    public function adminUsers()
+    {
+        $users = User::All()->where('role', 'user');
+        return view('admin.users', ['users' => $users]);
+    }
+
+    public function adminResto()
+    {
+        $users = User::All()->where('role', 'resto');
+        return view('admin.restos', ['users' => $users]);
     }
 
 }

@@ -69,3 +69,10 @@ Route::put('/card/minus/{id}', [CardController::class, 'minus'])->name('minus')-
 
 Route::get('/orders/all', [OrderController::class, 'getOrders'])->name('payment')->middleware('user');
 Route::get('/ticket/{id}', [CardController::class, 'ticket'])->name('ticket')->middleware('user');
+Route::get('/search', [AuthController::class, 'search'])->name('resto.search')->middleware('user');
+
+
+
+Route::get('/admin/users', [AuthController::class, 'adminUsers'])->name('adminUsers')->middleware('admin');
+Route::get('/admin/restaurants', [AuthController::class, 'adminRestos'])->name('adminRestos')->middleware('admin');
+Route::get('/admin/plats', [AuthController::class, 'adminPlats'])->name('adminPlats')->middleware('admin');
