@@ -174,6 +174,10 @@
                                             class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                                             {{ $card->total }}$
                                         </div>
+                                        <p
+                                            class="text-sm ml-4 font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                            {{ $card->status }}
+                                        </p>
                                     </div>
                                 </li>
                             @endforeach
@@ -190,7 +194,24 @@
         </div>
     </section>
 
+    <script>
+        function updateOrderCount() {
+            $.ajax({
+                url: "/count",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    const orderCount = response.orderCount;
+                    $("#orderCount").text(orderCount);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching order count:", error);
+                }
+            });
+        }
 
+        updateOrderCount();
+    </script>
 </body>
 
 

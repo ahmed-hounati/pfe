@@ -11,25 +11,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CardController extends Controller
 {
-    public function getCommands()
-    {
-        $commands = Card::join('users', 'cards.user_id', '=', 'users.id')
-            ->join('plats', 'cards.plat_id', '=', 'plats.id')
-            ->where('cards.validation', 0)
-            ->select('cards.*', 'users.*', 'plats.*')
-            ->get();
 
-        return view('resto.commands', ['commands' => $commands]);
-    }
 
-    public function acceptCommand($id)
-    {
-        $command = Card::findOrFail($id);
-        $command->validation = 1;
-        $command->save();
+    // public function acceptCommand($id)
+    // {
+    //     $command = Card::findOrFail($id);
+    //     $command->validation = 1;
+    //     $command->save();
 
-        return redirect()->route('getCommands')->with('success', 'Command accepted');
-    }
+    //     return redirect()->route('getCommands')->with('success', 'Command accepted');
+    // }
 
     public function addToCard(Request $request, $id)
     {
@@ -55,6 +46,7 @@ class CardController extends Controller
         $card->user_id = Auth::user()->id;
         $card->quantity = $request->quantity;
         $card->total = $total;
+        $card->resto_id = $plat->resto_id;
         $card->save();
 
 

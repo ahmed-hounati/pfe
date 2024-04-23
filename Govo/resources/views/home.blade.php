@@ -168,6 +168,27 @@
         </div>
 
     </section>
+    <section class="w-full py-16 pb-20 bg-white">
+        <div class="container px-8 mx-auto sm:px-12 lg:px-20">
+            <h1 class="mb-3 text-3xl font-bold leading-tight text-center text-gray-900 md:text-4xl">Trusted by</h1>
+            <p class="text-lg text-center text-gray-600 ">We've been trusted and used by some of the top companies in
+                the industry.</p>
+            <div class="grid grid-cols-2 gap-16 py-16 mb-0 text-center lg:grid-cols-3">
+                <div class="flex items-center justify-center rounded">
+                    <img src="https://cdn.dribbble.com/users/47558/screenshots/1467643/media/8a93469d0e82b8876525caa06a721a32.png"
+                        alt="um6p" class="block object-contain h-8 lg:h-24">
+                </div>
+                <div class="flex items-center justify-center rounded">
+                    <img src="https://cdn.dribbble.com/users/1948092/screenshots/7230347/media/5f304acfcf2ad7ee0d412724e9a69d38.jpg"
+                        alt="simplon" class="block object-contain h-16 lg:h-24">
+                </div>
+                <div class="flex items-center justify-center rounded">
+                    <img src="https://cdn.dribbble.com/users/4643902/screenshots/20424997/media/b42d6b5f1dc2092e75f189f913ebdd3a.jpg"
+                        alt="Reddit Logo" class="block object-contain h-12 lg:h-24">
+                </div>
+            </div>
+        </div>
+    </section>
     <footer>
         <div class="relative mt-16 bg-[#F2BD36]">
             <svg class="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-deep-purple-accent-400"
@@ -188,100 +209,20 @@
                     </div>
                     <div class="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-4">
                         <div>
-                            <p class="font-semibold tracking-wide text-teal-accent-400">
+                            <a class="font-semibold tracking-wide text-teal-accent-400">
                                 Category
-                            </p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">News</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">World</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Games</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">References</a>
-                                </li>
-                            </ul>
+                            </a>
                         </div>
                         <div>
-                            <p class="font-semibold tracking-wide text-teal-accent-400">Cherry</p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Web</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">eCommerce</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Business</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Entertainment</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Portfolio</a>
-                                </li>
-                            </ul>
+                            <a class="font-semibold tracking-wide text-teal-accent-400">Cherry</p>
                         </div>
                         <div>
                             <p class="font-semibold tracking-wide text-teal-accent-400">Apples</p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Media</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Brochure</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Nonprofit</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Educational</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Projects</a>
-                                </li>
-                            </ul>
                         </div>
                         <div>
                             <p class="font-semibold tracking-wide text-teal-accent-400">
                                 Business
                             </p>
-                            <ul class="mt-2 space-y-2">
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Infopreneur</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Personal</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Wiki</a>
-                                </li>
-                                <li>
-                                    <a href="/"
-                                        class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Forum</a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

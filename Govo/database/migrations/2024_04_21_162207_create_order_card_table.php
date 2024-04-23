@@ -10,10 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('order_card', function (Blueprint $table) {
+        Schema::create('order_cards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('card_id')->constrained('cards')->onDelete('cascade');
+            $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending');
             $table->timestamps();
         });
     }

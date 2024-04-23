@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\OrderCardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PlatController;
 use GuzzleHttp\Middleware;
@@ -43,8 +44,8 @@ Route::get('/plats/{id}/edit', [PlatController::class, 'edit'])->name('plats.edi
 Route::put('/plats/{id}/update', [PlatController::class, 'update'])->name('updatePlat')->middleware('resto');
 Route::delete('/plats/{id}/delete', [PlatController::class, 'destroy'])->name('plats.destroy')->middleware('resto');
 
-Route::get('/commands', [CardController::class, 'getCommands'])->name('getCommands')->middleware('resto');
-Route::post('/command/{id}/accept', [CardController::class, 'acceptCommand'])->name('command.accept')->middleware('resto');
+Route::get('/commands', [OrderCardController::class, 'getCommands'])->name('getCommands')->middleware('resto');
+Route::post('/command/{id}/accept', [OrderCardController::class, 'confirmOrder'])->name('command.accept')->middleware('resto');
 
 Route::get('/Restorents', [AuthController::class, 'getRest'])->name('allResto');
 Route::get('/Restorents/{id}/plats', [PlatController::class, 'restoPlats'])->name('restoPlats');

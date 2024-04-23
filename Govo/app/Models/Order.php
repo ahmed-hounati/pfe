@@ -13,7 +13,7 @@ class Order extends Model
 
     public function cards()
     {
-        return $this->belongsToMany(Card::class, 'order_card', 'order_id', 'card_id');
+        return $this->belongsToMany(Card::class, 'order_cards', 'order_id', 'card_id');
     }
 
 }
