@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderCard;
-use Illuminate\Http\Request;
+use App\Models\Plat;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderCardController extends Controller
 {
@@ -41,6 +42,7 @@ class OrderCardController extends Controller
 
         return view('resto.commands', ['commands' => $commands]);
     }
+
 
 
 }

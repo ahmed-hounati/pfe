@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\OrderCard;
 use App\Models\Plat;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -59,14 +61,16 @@ class AuthController extends Controller
     }
     public function home()
     {
-        // $plats = Plat::select('plats.*', DB::raw('COUNT(cards.plat_id) as total'))
-        //     ->join('cards', 'cards.plat_id', '=', 'plats.id')
-        //     ->groupBy('plats.id', 'plats.name', 'plats.price')
-        //     ->orderByDesc('total')
-        //     ->limit(3)
-        //     ->get();
+        $mostOrderedPlats = OrderCard::select('plats.id', 'plats.name', 'plats.price', 'plats.image', DB::raw('count(plats.id) as total'))
+            ->join('cards', 'order_cards.card_id', '=', 'cards.id')
+            ->join('plats', 'cards.plat_id', '=', 'plats.id')
+            ->where('order_cards.status', 'confirmed')
+            ->groupBy('plats.id', 'plats.name', 'plats.price', 'plats.image')
+            ->orderByDesc('total')
+            ->take(3)
+            ->get();
 
-        return view('home');
+        return view('home', ['plats' => $mostOrderedPlats]);
     }
 
 
