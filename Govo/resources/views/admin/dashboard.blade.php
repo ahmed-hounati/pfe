@@ -19,13 +19,9 @@
                             <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/plats"
+                            <li><a href="/admin/add/categories"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
-                                    Users</a>
-                            </li>
-                            <li><a href="/commands"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
-                                    Restaurants</a>
+                                    Add Categories</a>
                             </li>
                         </ul>
                     </div>
@@ -106,6 +102,21 @@
         </div>
     </nav>
     <section class="px-12 py-12">
+        @if (session('success'))
+            <div class="bg-green-100 border mt-8 border-green-400 text-green-700 px-4 py-3 rounded relative"
+                role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                </span>
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="bg-red-100 border mt-8 border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ session('error') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                </span>
+            </div>
+        @endif
         <div class="w-full px-6 py-6 mx-auto">
             <!-- row 1 -->
             <div class="flex flex-wrap -mx-3">
@@ -159,6 +170,26 @@
                                             class="mb-0 font-sans text-sm font-semibold leading-normal uppercase - dark:opacity-60">
                                             Plats</p>
                                         <h5 class="mb-2 font-bold -">{{ $plats }}</h5>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                        <div class="flex-auto p-4">
+                            <div class="flex flex-row -mx-3">
+                                <div class="flex-none w-2/3 max-w-full px-3">
+                                    <div>
+                                        <p
+                                            class="mb-0 font-sans text-sm font-semibold leading-normal uppercase - dark:opacity-60">
+                                            Categories</p>
+                                        <h5 class="mb-2 font-bold -">{{ $cat }}</h5>
 
                                     </div>
                                 </div>
@@ -229,16 +260,20 @@
                                                         class="mb-0 text-xs font-semibold leading-tight - dark:opacity-60">
                                                     </p>
                                                     @if ($user->ban)
-                                                        <form action="{{ route('admin.ban', $user->id) }}">
+                                                        <form action="{{ route('admin.unban', $user->id) }}"
+                                                            method="POST">
+                                                            @csrf
                                                             <button
                                                                 class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                                                                 UnBan</button>
                                                         </form>
                                                     @elseif(!$user->ban)
-                                                        <form action="{{ route('admin.unban', $user->id) }}">
+                                                        <form action="{{ route('admin.ban', $user->id) }}"
+                                                            method="POST">
+                                                            @csrf
                                                             <button
-                                                                class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                                                                UnBan</button>
+                                                                class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                                                                Ban</button>
                                                         </form>
                                                     @endif
                                                 </div>
@@ -272,11 +307,16 @@
                                                     {{ $category->name }}</h6>
                                             </div>
                                         </div>
-                                        <div class="flex">
-                                            <button
-                                                class="group ease-in leading-pro text-xs rounded-3.5xl p-1.2 h-6.5 w-6.5 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all -"><i
-                                                    class="ni ease-bounce text-2xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200"
-                                                    aria-hidden="true"></i></button>
+                                        <div class="flex justify-between">
+                                            <a href="{{ route('categories.edit', $category->id) }}"
+                                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Update</a>
+                                            <form method="POST"
+                                                action="{{ route('categories.destroy', $category->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                                            </form>
                                         </div>
                                     </li>
                                 @endforeach

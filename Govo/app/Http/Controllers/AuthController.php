@@ -142,14 +142,15 @@ class AuthController extends Controller
         $restos = User::All()->where('role', 'resto')->count();
         $plats = Plat::All()->count();
         $AllUsers = User::All();
+        $cat = Category::All()->count();
         $categories = Category::All();
-        return view('admin.dashboard', ['users' => $users, 'restos' => $restos, 'plats' => $plats, 'categories' => $categories, 'allUsers' => $AllUsers]);
+        return view('admin.dashboard', ['users' => $users, 'restos' => $restos, 'plats' => $plats, 'cat' => $cat, 'categories' => $categories, 'allUsers' => $AllUsers]);
     }
 
     public function ban($id)
     {
         $user = User::findOrFail($id);
-        $user->ban = 1;
+        $user->ban = true;
         $user->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'User baned successfully');
@@ -158,7 +159,7 @@ class AuthController extends Controller
     public function unban($id)
     {
         $user = User::findOrFail($id);
-        $user->ban = 0;
+        $user->ban = false;
         $user->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'User unbanned successfully');

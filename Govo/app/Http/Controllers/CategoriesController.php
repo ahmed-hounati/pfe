@@ -18,14 +18,14 @@ class CategoriesController extends Controller
         $categories = Category::all();
         return view('user.categorie', ['categories' => $categories]);
     }
-    public function create()
+    public function add()
     {
-        return view('categories.create');
+        return view('admin.create');
     }
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique',
+            'name' => 'required',
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -40,24 +40,37 @@ class CategoriesController extends Controller
         $category->image = $imageName;
 
         $category->save();
-        return redirect()->route('categories.all')->with('success', 'Category created successfully');
+        return redirect()->route('admin.dashboard')->with('success', 'Category created successfully');
     }
-    public function edit(Request $request, $id)
+    public function edit($id)
+    {
+        $cat = Category::findOrFail($id);
+        return view('admin.edit', ['category' => $cat]);
+    }
+    public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
         $request->validate([
-            'name' => 'require|unique',
+            'name' => 'required',
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+        } else {
+            $imageName = '';
+        }
         $category->name = $request->name;
+        $category->image = $imageName;
         $category->save();
-        return redirect()->route('categories.all')->with('success', 'Category updated successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'Category updated successfully!');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return redirect()->route('categories.all')->with('success', 'Category deleted successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'Category deleted successfully!');
     }
 
 

@@ -79,3 +79,8 @@ Route::get('/admin/restaurants', [AuthController::class, 'adminRestos'])->name('
 Route::get('/admin/plats', [AuthController::class, 'adminPlats'])->name('adminPlats')->middleware('admin');
 Route::post('/admin/ban/{id}', [AuthController::class, 'ban'])->name('admin.ban')->middleware('admin');
 Route::post('/admin/unban/{id}', [AuthController::class, 'unban'])->name('admin.unban')->middleware('admin');
+Route::get('/admin/add/categories', [CategoriesController::class, 'add'])->name('categories.add')->middleware('admin');
+Route::post('/admin/store/categories', [CategoriesController::class, 'store'])->name('categories.store')->middleware('admin');
+Route::get('/category/edit/{id}', [CategoriesController::class, 'edit'])->name('categories.edit')->middleware('admin');
+Route::put('/category/update/{id}', [CategoriesController::class, 'update'])->name('update.Categories')->middleware('admin');
+Route::delete('/category/destroy/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy')->middleware('admin');
