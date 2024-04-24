@@ -130,6 +130,7 @@
         </div>
     </nav>
     <section class="px-12 py-12">
+        <h1 class="text-3xl font-bold"> Orders :</h1>
         @if (session('success'))
             <div class="bg-green-100 border mt-8 border-green-400 text-green-700 px-4 py-3 rounded relative"
                 role="alert">

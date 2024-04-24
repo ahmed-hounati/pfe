@@ -73,6 +73,9 @@ Route::get('/search', [AuthController::class, 'search'])->name('resto.search')->
 
 
 
+Route::get('/admin/dashboard', [AuthController::class, 'admin'])->name('admin.dashboard')->middleware('admin');
 Route::get('/admin/users', [AuthController::class, 'adminUsers'])->name('adminUsers')->middleware('admin');
 Route::get('/admin/restaurants', [AuthController::class, 'adminRestos'])->name('adminRestos')->middleware('admin');
 Route::get('/admin/plats', [AuthController::class, 'adminPlats'])->name('adminPlats')->middleware('admin');
+Route::post('/admin/ban/{id}', [AuthController::class, 'ban'])->name('admin.ban')->middleware('admin');
+Route::post('/admin/unban/{id}', [AuthController::class, 'unban'])->name('admin.unban')->middleware('admin');

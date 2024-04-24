@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Plat;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -81,10 +83,10 @@ class AuthController extends Controller
         $remember = $request->filled('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            if (Auth::user()->role === "resto") {
+            if (Auth::user()->role == "resto") {
                 return redirect()->route('resto.dashboard');
             }
-            if (Auth::user()->role === "admin") {
+            if (Auth::user()->role == "admin") {
                 return redirect()->route('admin.dashboard');
             } else {
                 return redirect()->route('allResto');
@@ -132,6 +134,34 @@ class AuthController extends Controller
     {
         $users = User::All()->where('role', 'resto');
         return view('admin.restos', ['users' => $users]);
+    }
+
+    public function admin()
+    {
+        $users = User::All()->where('role', 'user')->count();
+        $restos = User::All()->where('role', 'resto')->count();
+        $plats = Plat::All()->count();
+        $AllUsers = User::All();
+        $categories = Category::All();
+        return view('admin.dashboard', ['users' => $users, 'restos' => $restos, 'plats' => $plats, 'categories' => $categories, 'allUsers' => $AllUsers]);
+    }
+
+    public function ban($id)
+    {
+        $user = User::findOrFail($id);
+        $user->ban = 1;
+        $user->save();
+
+        return redirect()->route('admin.dashboard')->with('success', 'User baned successfully');
+    }
+
+    public function unban($id)
+    {
+        $user = User::findOrFail($id);
+        $user->ban = 0;
+        $user->save();
+
+        return redirect()->route('admin.dashboard')->with('success', 'User unbanned successfully');
     }
 
 }

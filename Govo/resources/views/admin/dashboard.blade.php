@@ -16,15 +16,16 @@
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="/" aria-label="Company" title="Company" class="inline-flex items-center mr-8">
-                            <img src="https://cdn.dribbble.com/users/544003/screenshots/16033104/media/4547b5deb38d689016d132705f909650.jpg?resize=1000x750&vertical=center"
-                                class="w-8 text-teal-accent-400" alt="logo">
+                            <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/users" aria-label="Our product" title="Our product"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Users</a>
+                            <li><a href="/plats"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                    Users</a>
                             </li>
-                            <li><a href="/restos" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Restaurants</a>
+                            <li><a href="/commands"
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                    Restaurants</a>
                             </li>
                         </ul>
                     </div>
@@ -53,9 +54,9 @@
                         </button>
                         <!-- Mobile menu dropdown
                             <div class="absolute top-0 left-0 w-full">
-                              <div class="p-5 bg-white border rounded shadow-sm">
+                                <div class="p-5 bg-white border rounded shadow-sm">
                                 <div class="flex items-center justify-between mb-4">
-                                  <div>
+                                    <div>
                                     <a href="/" aria-label="Company" title="Company" class="inline-flex items-center">
                                       <svg class="w-8 text-deep-purple-accent-400" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor" fill="none">
                                         <rect x="3" y="1" width="7" height="12"></rect>
@@ -104,7 +105,190 @@
             </div>
         </div>
     </nav>
-    <section> </section>
+    <section class="px-12 py-12">
+        <div class="w-full px-6 py-6 mx-auto">
+            <!-- row 1 -->
+            <div class="flex flex-wrap -mx-3">
+                <!-- card1 -->
+                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                        <div class="flex-auto p-4">
+                            <div class="flex flex-row -mx-3">
+                                <div class="flex-none w-2/3 max-w-full px-3">
+                                    <div>
+                                        <p
+                                            class="mb-0 font-sans text-sm font-semibold leading-normal uppercase - dark:opacity-60">
+                                            Users</p>
+                                        <h5 class="mb-2 font-bold -">{{ $users }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card2 -->
+                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                        <div class="flex-auto p-4">
+                            <div class="flex flex-row -mx-3">
+                                <div class="flex-none w-2/3 max-w-full px-3">
+                                    <div>
+                                        <p
+                                            class="mb-0 font-sans text-sm font-semibold leading-normal uppercase - dark:opacity-60">
+                                            Restaurants</p>
+                                        <h5 class="mb-2 font-bold -">{{ $restos }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card3 -->
+                <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                        <div class="flex-auto p-4">
+                            <div class="flex flex-row -mx-3">
+                                <div class="flex-none w-2/3 max-w-full px-3">
+                                    <div>
+                                        <p
+                                            class="mb-0 font-sans text-sm font-semibold leading-normal uppercase - dark:opacity-60">
+                                            Plats</p>
+                                        <h5 class="mb-2 font-bold -">{{ $plats }}</h5>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- cards row 3 -->
+
+            <div class="flex flex-wrap mt-6 -mx-3">
+                <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-solid shadow-xl">
+                        <div class="p-4 pb-0 mb-0 rounded-t-4">
+                            <div class="flex justify-between">
+                                <h6 class="mb-2 -">Sales by Country</h6>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table
+                                class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
+                                <tbody>
+                                    @foreach ($allUsers as $user)
+                                        <tr>
+                                            <td
+                                                class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                                                <div class="flex items-center px-2 py-1">
+                                                    <div>
+                                                        <img class="w-10 h-10 rounded-full"
+                                                            src="{{ asset('images/' . $user->image) }}"
+                                                            alt="Country flag" />
+                                                    </div>
+                                                    <div class="ml-6">
+                                                        <p
+                                                            class="mb-0 text-xs font-semibold leading-tight - dark:opacity-60">
+                                                            name:</p>
+                                                        <h6 class="mb-0 text-sm leading-normal -">{{ $user->name }}
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                                <div class="text-center">
+                                                    <p
+                                                        class="mb-0 text-xs font-semibold leading-tight - dark:opacity-60">
+                                                        Role:</p>
+                                                    <h6 class="mb-0 text-sm leading-normal -">{{ $user->role }}</h6>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                                <div class="text-center">
+                                                    <p
+                                                        class="mb-0 text-xs font-semibold leading-tight - dark:opacity-60">
+                                                        Status:</p>
+                                                    <h6 class="mb-0 text-sm leading-normal -">{{ $user->role }}</h6>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                                <div class="text-center">
+                                                    <p
+                                                        class="mb-0 text-xs font-semibold leading-tight - dark:opacity-60">
+                                                    </p>
+                                                    @if ($user->ban)
+                                                        <form action="{{ route('admin.ban', $user->id) }}">
+                                                            <button
+                                                                class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                                                                UnBan</button>
+                                                        </form>
+                                                    @elseif(!$user->ban)
+                                                        <form action="{{ route('admin.unban', $user->id) }}">
+                                                            <button
+                                                                class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                                                                UnBan</button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
+                    <div
+                        class="border-black/12.5 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
+                        <div class="p-4 pb-0 rounded-t-4">
+                            <h6 class="mb-0 -">Categories</h6>
+                        </div>
+                        <div class="flex-auto p-4">
+                            <ul class="flex flex-col pl-0 mb-0 rounded-lg">
+                                @foreach ($categories as $category)
+                                    <li
+                                        class="relative flex justify-between py-2 pr-4 mb-2 border-0 rounded-t-lg rounded-xl text-inherit">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="inline-block w-8 h-8 mr-4 text-center text-black bg-center shadow-sm fill-current stroke-none bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 rounded-xl">
+                                                <img src="{{ asset('images/' . $category->image) }}"
+                                                    class="text-white ni ni-mobile-button relative top-0.75 text-xxs"></img>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <h6 class="mb-1 text-sm leading-normal text-slate-700 -">
+                                                    {{ $category->name }}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="flex">
+                                            <button
+                                                class="group ease-in leading-pro text-xs rounded-3.5xl p-1.2 h-6.5 w-6.5 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all -"><i
+                                                    class="ni ease-bounce text-2xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200"
+                                                    aria-hidden="true"></i></button>
+                                        </div>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 </body>
 
 </html>

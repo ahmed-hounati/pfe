@@ -198,8 +198,8 @@
                         method="POST">
                         @csrf
                         <button type="submit"
-                            class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">Confirm
-                            Orders</button>
+                            class="py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg">Confirm
+                        </button>
                     </form>
                 @endif
 
@@ -261,6 +261,24 @@
                 });
             });
         });
+
+
+        function updateOrderCount() {
+            $.ajax({
+                url: "/count",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    const orderCount = response.orderCount;
+                    $("#orderCount").text(orderCount);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching order count:", error);
+                }
+            });
+        }
+
+        updateOrderCount();
     </script>
 
 </body>
