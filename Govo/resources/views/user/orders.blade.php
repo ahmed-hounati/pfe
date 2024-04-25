@@ -38,9 +38,9 @@
                                     Plats</a>
                             </li>
                             <li><a href="/orders/all"
-                                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
-                                My orders</a>
-                        </li>
+                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                                    My orders</a>
+                            </li>
                         </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -149,8 +149,7 @@
         <div class="grid grid-cols-1 mb-6 gap-8 mt-8 xl:mt-12 xl:gap-16 md:grid-cols-2 xl:grid-cols-3">
 
             @foreach ($orders as $order)
-                <div
-                    class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <div class="w-full max-w-md p-4 bg-[#F2BD36] border border-gray-200 rounded-lg shadow sm:p-8  ">
                     <div class="flex items-center justify-between mb-4">
                         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
                             {{ $order->created_at }}</h5>
@@ -171,7 +170,7 @@
                                             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                                 {{ $card->plat->name }}
                                             </p>
-                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            <p class="text-sm text-gray-700 truncate ">
                                                 x{{ $card->quantity }}
                                             </p>
                                         </div>
@@ -180,20 +179,20 @@
                                             {{ $card->total }}$
                                         </div>
                                         @if ($card->status == 'pending')
-                                            <p
-                                                class="text-sm mx-4 font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                            <span
+                                                class="text-sm mx-4 rounded-lg font-bold text-white bg-blue-600 hover:underline ">
                                                 {{ $card->status }}
-                                            </p>
+                                            </span>
                                         @endif
                                         @if ($card->status == 'canceled')
                                             <p
-                                                class="text-sm mx-4 font-medium text-red-600 hover:underline dark:text-red-500">
+                                                class="text-sm text-white rounded-lg mx-4 font-bold bg-red-600 hover:underline">
                                                 {{ $card->status }}
                                             </p>
                                         @endif
                                         @if ($card->status == 'confirmed')
                                             <p
-                                                class="text-sm mx-4 font-medium text-green-600 hover:underline dark:text-green-500">
+                                                class="text-sm mx-4 bg-green-600 rounded-lg font-bold text-white hover:underline">
                                                 {{ $card->status }}
                                             </p>
                                             <div class="flex justify-center items-center">

@@ -144,26 +144,25 @@
         <h1 class="text-center text-3xl font-bold">Best Plats</h1>
         <div class="flex justify-center items-center h-screen">
             @foreach ($plats as $plat)
-            <div class="group relative block overflow-hidden">
-                <img src=""
-                    alt=""
-                    class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
+                <div class="group relative block overflow-hidden">
+                    <img src="{{ asset('images/' . $plat->image) }}" alt=""
+                        class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
 
-                <div class="relative border border-gray-100 bg-white p-6">
-                    <span class="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium"> New </span>
+                    <div class="relative border border-gray-100 bg-white p-6">
+                        <span class="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium"> New </span>
 
-                    <h3 class="mt-4 text-lg font-medium text-gray-900">{{$plat->name}}</h3>
+                        <h3 class="mt-4 text-lg font-medium text-gray-900">{{ $plat->name }}</h3>
 
-                    <p class="mt-1.5 text-sm text-gray-700">$14.99</p>
+                        <p class="mt-1.5 text-sm text-gray-700">$14.99</p>
 
-                    <form class="mt-4">
-                        <button
-                            class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
-                            Add to Cart
-                        </button>
-                    </form>
+                        <form class="mt-4">
+                            <button
+                                class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
             @endforeach
         </div>
 

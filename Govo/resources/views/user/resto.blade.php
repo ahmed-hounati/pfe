@@ -147,7 +147,7 @@
             </div>
         @endif
         <form class="max-w-md mx-auto" action="{{ route('resto.search') }}" method="get">
-            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
+            <label for="query" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -163,83 +163,81 @@
                     class="text-white absolute end-2.5 bottom-2.5 bg-[#F2BD36] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
             </div>
         </form>
+        <section id="search-results" class="restos">
 
-        <div id="searchResults" class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            @foreach ($restos as $resto)
-                <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
-                    <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
-                        style="background-image: url({{ asset('images/' . $resto->image) }})">
+            <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                @foreach ($restos as $resto)
+                    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                        <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
+                            style="background-image: url({{ asset('images/' . $resto->image) }})">
+                        </div>
+                        <div
+                            class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
+                            <a href="{{ route('restoPlats', $resto->id) }}"
+                                class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
+                                {{ $resto->name }}</a>
+                        </div>
                     </div>
-                    <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
-                        <a href="{{ route('restoPlats', $resto->id) }}"
-                            class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
-                            {{ $resto->name }}</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </section>
-    <script>
-        function updateOrderCount() {
-            $.ajax({
-                url: "/count",
-                type: "GET",
-                dataType: "json",
-                success: function(response) {
-                    const orderCount = response.orderCount;
-                    $("#orderCount").text(orderCount);
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching order count:", error);
-                }
-            });
-        }
-
-        updateOrderCount();
-
-        function fetchSearchResults(query) {
-            fetch(`/search?q=${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    displaySearchResults(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching search results:', error);
+                @endforeach
+            </div>
+        </section>
+        <script>
+            function updateOrderCount() {
+                $.ajax({
+                    url: "/count",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        const orderCount = response.orderCount;
+                        $("#orderCount").text(orderCount);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching order count:", error);
+                    }
                 });
-        }
+            }
 
-        function displaySearchResults(results) {
-            const searchResultsDiv = document.getElementById('searchResults');
-            searchResultsDiv.innerHTML = '';
+            updateOrderCount();
 
-            results.forEach(resto => {
-                const resultCard = document.createElement('div');
-                resultCard.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'w-full', 'max-w-sm',
-                    'mx-auto');
+            const searchForm = document.getElementById('search-form');
+            const searchResults = document.getElementById('search-results');
+            searchForm.addEventListener('input', function(event) {
+                const query = event.target.value;
 
-                resultCard.innerHTML = `
-            <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
-                style="background-image: url(${resto.image})">
-            </div>
-            <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64">
-                <a href="/restoPlats/${resto.id}"
-                    class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
-                    ${resto.name}
-                </a>
-            </div>
-        `;
+                fetch(`/search?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
 
-                searchResultsDiv.appendChild(resultCard);
+                        searchResults.innerHTML = '';
+
+                        data.restos.forEach(resto => {
+                            const restoDiv = document.createElement('resto');
+                            restoDiv.classList.add('resto');
+
+
+                            restoDiv.innerHTML = `                    
+                            <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                                <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
+                                    style="background-image: url({{ asset('images/' . ${resto . image}) }})">
+                            </div>
+                        <div
+                            class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
+                            <a href="{{ route('restoPlats', ${resto . id}) }}"
+                                class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
+                                ${resto . name}</a>
+                        </div>
+                    </div>
+            `;
+
+                            searchResults.appendChild(restoDiv);
+                        });
+
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la recherche :', error);
+                    });
             });
-        }
-
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', function() {
-            const query = searchInput.value;
-            fetchSearchResults(query);
-        });
-    </script>
+        </script>
 </body>
 
 

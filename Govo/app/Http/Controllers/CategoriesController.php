@@ -25,7 +25,7 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:categories',
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -72,8 +72,4 @@ class CategoriesController extends Controller
         $category->delete();
         return redirect()->route('admin.dashboard')->with('success', 'Category deleted successfully!');
     }
-
-
-
-
 }

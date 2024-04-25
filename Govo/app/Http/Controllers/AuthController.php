@@ -122,10 +122,13 @@ class AuthController extends Controller
 
     public function search(Request $request)
     {
-        $input = $request->input('title');
-        $restos = User::where('name', 'like', '%' . $input . '%')->where('role', 'resto')->get();
+        $query = $request->input('query');
 
-        return response()->json($restos);
+        $restos = User::where('name', 'like', "%$query%")
+            ->Where('role', 'resto')
+            ->get();
+
+        return response()->json(['restos' => $restos]);
     }
 
     public function adminUsers()

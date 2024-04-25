@@ -99,7 +99,7 @@ class PlatController extends Controller
     {
         $plats = Plat::All()->where('category_id', $id);
         $orderCount = Card::where('user_id', Auth::user()->id)->count();
-        return redirect()->route('user.dashboard', ['plats' => $plats, 'orderCount' => $orderCount]);
+        return view('user.dashboard', ['plats' => $plats, 'orderCount' => $orderCount]);
     }
 
     public function restoPlats($id)
