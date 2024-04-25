@@ -133,41 +133,92 @@
             </div>
         @endif
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            @foreach ($plats as $plat)
-                <div class="max-w-xs p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900"
-                    bis_skin_checked="1">
-                    <img src="{{ asset('images/' . $plat->image) }}" alt=""
-                        class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500">
-                    <div class="mt-6 mb-2" bis_skin_checked="1">
-                        <span
-                            class="block text-xs font-medium tracking-widest uppercase dark:text-violet-600">{{ $plat->category->name }}</span>
-                        <h2 class="text-xl font-semibold tracking-wide">{{ $plat->name }}</h2>
+        <div class="flex flex-wrap -mx-3">
+            <div class="flex-none w-full max-w-full px-3">
+                <div
+                    class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                    <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                        <h6 class="text-black">Commands table</h6>
                     </div>
-                    <p class="dark:text-gray-800">{{ $plat->description }}</p>
-                    <div class="text-center">
-                        <p class="text-3xl">{{ $plat->price }}$</p>
-                    </div>
-                    <div class="flex justify-between">
-                        <a href="{{ route('plats.edit', $plat->id) }}"
-                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Update</a>
-                        <form method="POST" action="{{ route('plats.destroy', $plat->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
-                        </form>
+                    <div class="flex-auto px-0 pt-0 pb-2">
+                        <div class="p-0 overflow-x-auto">
+                            <table
+                                class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                                <thead class="align-bottom">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 text-black text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                            Costumer</th>
+                                        <th
+                                            class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 text-black text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                            Plat</th>
+                                        <th
+                                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 text-black text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                            Status</th>
+                                        <th
+                                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 text-black text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                            Date</th>
+                                        <th
+                                            class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-collapse border-solid shadow-none dark:border-white/40 text-black tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($commands as $command)
+                                        <tr>
+                                            <td
+                                                class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <div class="flex px-2 py-1">
+                                                    <div>
+                                                        <img src="{{ asset('images/' . $command->card->user->image) }}"
+                                                            class="inline-flex items-center justify-center mr-4 text-sm text-black transition-all duration-200 ease-in-out h-9 w-9 rounded-xl"
+                                                            alt="user" />
+                                                    </div>
+                                                    <div class="flex flex-col justify-center">
+                                                        <h6 class="mb-0 text-sm leading-normal text-black">
+                                                            {{ $command->card->user->name }}</h6>
+                                                        <p
+                                                            class="mb-0 text-xs leading-tight text-black dark:opacity-80 text-slate-400">
+                                                            {{ $command->card->user->email }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <div class="flex px-2 py-1">
+                                                    <div>
+                                                        <img src="{{ asset('images/' . $command->card->plat->image) }}"
+                                                            class="inline-flex items-center justify-center mr-4 text-sm text-black transition-all duration-200 ease-in-out h-9 w-9 rounded-xl"
+                                                            alt="user" />
+                                                    </div>
+                                                    <div class="flex flex-col justify-center">
+                                                        <h6 class="mb-0 text-sm leading-normal text-black">
+                                                            {{ $command->card->plat->name }}</h6>
+                                                        <p
+                                                            class="mb-0 text-xs leading-tight text-black dark:opacity-80 text-slate-400">
+                                                            x{{ $command->card->quantity }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <span
+                                                    class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">{{ $command->status }}</span>
+                                            </td>
+                                            <td
+                                                class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                <span
+                                                    class="text-xs font-semibold leading-tight text-black text-slate-400">{{ $command->card->created_at }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
-
-
-        <a href="/plats/create"
-            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 fixed bottom-4 right-4"><i
-                class="fa-solid fa-plus fa-xl"></i></a>
-
-
     </section>
 </body>
 

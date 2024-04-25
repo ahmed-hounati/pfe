@@ -18,17 +18,6 @@
                         <a href="/" aria-label="Company" title="Company" class="inline-flex items-center mr-8">
                             <img src="{{ asset('images/govo-logo.png') }}" class="w-32" alt="logo">
                         </a>
-                        <ul class="flex items-center hidden space-x-8 lg:flex">
-                            <li><a href="/categories" aria-label="Our product" title="Our product"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
-                            </li>
-                            <li><a href="/Opportunities" aria-label="Product pricing" title="Product pricing"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Opportunities</a>
-                            </li>
-                            <li><a href="/about" aria-label="About us" title="About us"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">About
-                                    us</a></li>
-                        </ul>
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li><a href="/login" aria-label="Sign in" title="Sign in"

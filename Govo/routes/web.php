@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/plats/{id}/update', [PlatController::class, 'update'])->name('updatePlat')->middleware('resto');
     Route::delete('/plats/{id}/delete', [PlatController::class, 'destroy'])->name('plats.destroy')->middleware('resto');
     Route::get('/commands', [OrderCardController::class, 'getCommands'])->name('getCommands')->middleware('resto');
+    Route::get('/allCommands', [OrderCardController::class, 'allCommands'])->name('allCommands')->middleware('resto');
     Route::post('/command/accept/{id}', [OrderCardController::class, 'confirmOrder'])->name('command.accept')->middleware('resto');
     Route::post('/command/cancel/{id}', [OrderCardController::class, 'cancelOrder'])->name('command.cancel')->middleware('resto');
 });
