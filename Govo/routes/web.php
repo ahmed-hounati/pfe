@@ -33,8 +33,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 
 Route::middleware(['auth'])->group(function () {
-    // Route::get('/categories', [CategoriesController::class, 'getCategories'])->name('categories');
-    // Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
     Route::get('/resto/dashboard', [AuthController::class, 'resto'])->name('resto.dashboard')->middleware('resto');
     Route::get('/plats', [PlatController::class, 'allPlats'])->name('allPlats')->middleware('resto');
     Route::get('/plats/create', [PlatController::class, 'create'])->name('createPlat')->middleware('resto');
@@ -42,7 +40,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/plats/{id}/edit', [PlatController::class, 'edit'])->name('plats.edit')->middleware('resto');
     Route::put('/plats/{id}/update', [PlatController::class, 'update'])->name('updatePlat')->middleware('resto');
     Route::delete('/plats/{id}/delete', [PlatController::class, 'destroy'])->name('plats.destroy')->middleware('resto');
-
     Route::get('/commands', [OrderCardController::class, 'getCommands'])->name('getCommands')->middleware('resto');
     Route::post('/command/accept/{id}', [OrderCardController::class, 'confirmOrder'])->name('command.accept')->middleware('resto');
     Route::post('/command/cancel/{id}', [OrderCardController::class, 'cancelOrder'])->name('command.cancel')->middleware('resto');

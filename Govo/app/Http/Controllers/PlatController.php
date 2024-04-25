@@ -67,6 +67,13 @@ class PlatController extends Controller
             'description' => 'required|min:5',
             'category_id' => 'required',
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+        } else {
+            $imageName = '';
+        }
         $resto_id = Auth::user()->id;
 
         $plat = Plat::findOrFail($id);
@@ -75,7 +82,7 @@ class PlatController extends Controller
         $plat->description = $request->description;
         $plat->category_id = $request->category_id;
         $plat->resto_id = $resto_id;
-        $plat->image = 'image.pnj';
+        $plat->image = $imageName;
         $plat->save();
 
         return redirect()->route('allPlats')->with('success', 'Plat Updated successfully');

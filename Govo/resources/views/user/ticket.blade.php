@@ -44,9 +44,9 @@
             list-style: none;
         }
 
-        .alfa {
+        /* .alfa {
             font-family: "Alfa Slab One", sans-serif;
-        }
+        } */
 
         .ticket {
             width: 220px;
@@ -216,12 +216,11 @@
 
         /* VENUE */
         .box-venue {
-            padding: 3px;
             background-color: var(--mustard);
-            background-image: url("https://www.transparenttextures.com/patterns/cardboard.png");
-            text-align: center;
-            display: grid;
-            grid-template-rows: repeat(3, 25px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
 
         .box-venue>* {
@@ -285,6 +284,7 @@
                 <div class="ticket-body__events">
                     <ul>
                         <li>{{ $card->plat->name }} x {{ $card->quantity }}</li>
+                        <li>{{ $card->plat->price * $card->quantity }}$</li>
                     </ul>
                 </div>
                 <div class="ticket-body__date">

@@ -158,10 +158,11 @@
                         class="relative flex flex-col items-center h-full py-10 duration-300 bg-white rounded-sm transition-color sm:items-stretch sm:flex-row">
                         <div class="px-12 py-8 text-center">
                             <h6 class="text-4xl font-bold text-deep-purple-accent-400 sm:text-5xl">
-                                82%
+                                {{ $plats }}
                             </h6>
                             <p class="text-center md:text-base">
-                                Lorem ipsum dolor adipiscing sit amet, consectetur elit.
+                                <span class="text-white">hhhhhhhh</span>All the Plats that you create. <span
+                                    class="text-white">hhhhhhhh</span>
                             </p>
                         </div>
                         <div
@@ -169,18 +170,15 @@
                         </div>
                         <div class="px-12 py-8 text-center">
                             <h6 class="text-4xl font-bold text-deep-purple-accent-400 sm:text-5xl">
-                                106.5K
+                                {{ $commands }}
                             </h6>
                             <p class="text-center md:text-base">
-                                Lorem ipsum elit consectetur sit amet, adipiscing dolor.
+                              <span class="text-white">hhh</span>
+                                All the Commands that you recerved.
                             </p>
                         </div>
                     </div>
                 </div>
-                <p class="mx-auto mb-4 text-gray-600 sm:text-center lg:max-w-2xl lg:mb-6 md:px-16">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                </p>
             </div>
         </div>
     </section>

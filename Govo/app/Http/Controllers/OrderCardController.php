@@ -43,6 +43,4 @@ class OrderCardController extends Controller
         return view('resto.commands', ['commands' => $commands]);
     }
 
-
-
 }
