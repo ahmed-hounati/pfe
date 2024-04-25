@@ -12,16 +12,6 @@ use Illuminate\Support\Facades\Auth;
 class CardController extends Controller
 {
 
-
-    // public function acceptCommand($id)
-    // {
-    //     $command = Card::findOrFail($id);
-    //     $command->validation = 1;
-    //     $command->save();
-
-    //     return redirect()->route('getCommands')->with('success', 'Command accepted');
-    // }
-
     public function addToCard(Request $request, $id)
     {
         $request->validate([
@@ -48,6 +38,7 @@ class CardController extends Controller
         $card->total = $total;
         $card->resto_id = $plat->resto_id;
         $card->save();
+        
 
 
         return redirect()->route('user.dashboard')->with([

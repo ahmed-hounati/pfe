@@ -106,7 +106,7 @@ class PlatController extends Controller
     {
         $plats = Plat::All()->where('category_id', $id);
         $orderCount = Card::where('user_id', Auth::user()->id)->count();
-        return view('user.dashboard', ['plats' => $plats, 'orderCount' => $orderCount, 'cat' => $id]);
+        return view('user.dashboard', ['plats' => $plats, 'orderCount' => $orderCount]);
     }
 
     public function restoPlats($id)
@@ -121,23 +121,5 @@ class PlatController extends Controller
         return view('admin.plats', ['plats' => $plats]);
     }
 
-    public function filterPlats(Request $request)
-    {
-        $minPrice = $request->input('minPrice');
-        $maxPrice = $request->input('maxPrice');
-        $cat = $request->category_id;
 
-        if (!$minPrice) {
-            $minPrice = 1;
-        }
-        if (!$maxPrice) {
-            $maxPrice = 9999;
-        }
-
-
-
-        $filteredPlats = Plat::where('category_id', $cat)->whereBetween('price', [$minPrice, $maxPrice])->with('category')->with('resto')->get();
-
-        return response()->json($filteredPlats);
-    }
 }

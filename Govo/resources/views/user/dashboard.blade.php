@@ -142,17 +142,6 @@
                 </span>
             </div>
         @endif
-        <form id="filterForm" class="flex flex-col items-center justify-center space-y-4">
-            <div class="flex flex-row gap-5">
-                <input type="number" class="hidden" name="category_id" value="{{ $cat }}">
-                <input type="number" name="minPrice" placeholder="Min Price"
-                    class="w-48 px-4 py-2 text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-lg focus:outline-none " />
-                <input type="number" name="maxPrice" placeholder="Max Price"
-                    class="w-48 px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg focus:outline-none " />
-                <button type="submit"
-                    class="px-6 py-2 text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:bg-yellow-600">Filter</button>
-            </div>
-        </form>
         <div id="platContainer" class="z-1 p-24 flex flex-wrap items-center justify-center">
             @foreach ($plats as $plat)
                 <div
@@ -217,76 +206,6 @@
         }
 
         updateOrderCount();
-
-
-        $(document).ready(function() {
-            $('#filterForm').submit(function(e) {
-                e.preventDefault();
-                var formData = $(this).serialize();
-
-                $.ajax({
-                    type: 'GET',
-                    url: '/filter-plats',
-                    data: formData,
-                    dataType: 'json',
-                    success: function(response) {
-                        updatePlats(response);
-                    }
-                });
-            });
-
-            function updatePlats(plats) {
-                var platContainer = $('#platContainer');
-                platContainer.empty();
-
-                plats.forEach(function(plat) {
-                    var platHtml = `
-            <div class="z-2 flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg">
-                <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
-                    style="transform: scale(1.5); opacity: 0.1;">
-                    <rect x="159.52" y="175" width="152" height="152" rx="8"
-                        transform="rotate(-45 159.52 175)" fill="white" />
-                    <rect y="107.48" width="152" height="152" rx="8"
-                        transform="rotate(-45 0 107.48)" fill="white" />
-                </svg>
-                <div class="relative pt-10 px-10 flex items-center justify-center">
-                    <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
-                        style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
-                    </div>
-                    <img class="relative w-40 rounded-xl" src="{{ asset('images/${plat.image}') }}"
-                        alt="">
-                </div>
-                <div class="relative text-white px-6 pb-6 mt-6">
-                    <span class="block opacity-75 -mb-1">${plat.category.name}</span>
-                    <div class="flex justify-between gap-4">
-                        <span class="block font-semibold text-xl">${plat.name}</span>
-                        <span
-                            class="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center">${plat.price}</span>
-                        <span class="block opacity-75 -mb-1">${plat.resto.name}</span>
-                    </div>
-                    @if (!Auth()->user()->ban)
-                        <form action="{{ route('AddToCard', ${plat . id}) }}" method="POST">
-                            @csrf
-                            <label for="quantity-input"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose
-                                quantity:</label>
-                            <div class="flex flex-col items-center">
-                                <input type="number" data-input-counter name="quantity"
-                                    class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                    value="1" min="1" required />
-                                <button
-                                    class="text-white mt-4 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><i
-                                        class="fa-solid fa-plus fa-xl"></i></button>
-                            </div>
-                        </form>
-                    @endif
-                </div>
-            </div>`;
-                    platContainer.append(platHtml);
-                });
-            }
-
-        });
     </script>
 </body>
 
