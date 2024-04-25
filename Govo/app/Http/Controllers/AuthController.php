@@ -158,7 +158,7 @@ class AuthController extends Controller
         $users = User::All()->where('role', 'user')->count();
         $restos = User::All()->where('role', 'resto')->count();
         $plats = Plat::All()->count();
-        $AllUsers = User::All();
+        $AllUsers = User::whereIn('role', ['user', 'resto'])->get();
         $cat = Category::All()->count();
         $categories = Category::All();
         return view('admin.dashboard', ['users' => $users, 'restos' => $restos, 'plats' => $plats, 'cat' => $cat, 'categories' => $categories, 'allUsers' => $AllUsers]);
