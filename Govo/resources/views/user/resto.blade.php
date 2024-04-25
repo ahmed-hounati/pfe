@@ -33,10 +33,6 @@
                             <li><a href="/user/categories"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
-                            <li><a href="/user/dashboard"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
-                                    Plats</a>
-                            </li>
                             <li><a href="/orders/all"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
                                     My orders</a>
@@ -167,17 +163,18 @@
 
             <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 @foreach ($restos as $resto)
-                    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                    <a href="{{ route('restoPlats', $resto->id) }}"
+                        class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                         <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
                             style="background-image: url({{ asset('images/' . $resto->image) }})">
                         </div>
                         <div
                             class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
-                            <a href="{{ route('restoPlats', $resto->id) }}"
+                            <p
                                 class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
-                                {{ $resto->name }}</a>
+                                {{ $resto->name }}</p>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         </section>
@@ -196,47 +193,7 @@
                     }
                 });
             }
-
             updateOrderCount();
-
-            const searchForm = document.getElementById('search-form');
-            const searchResults = document.getElementById('search-results');
-            searchForm.addEventListener('input', function(event) {
-                const query = event.target.value;
-
-                fetch(`/search?query=${query}`)
-                    .then(response => response.json())
-                    .then(data => {
-
-                        searchResults.innerHTML = '';
-
-                        data.restos.forEach(resto => {
-                            const restoDiv = document.createElement('resto');
-                            restoDiv.classList.add('resto');
-
-
-                            restoDiv.innerHTML = `                    
-                            <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
-                                <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
-                                    style="background-image: url({{ asset('images/' . ${resto . image}) }})">
-                            </div>
-                        <div
-                            class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
-                            <a href="{{ route('restoPlats', ${resto . id}) }}"
-                                class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
-                                ${resto . name}</a>
-                        </div>
-                    </div>
-            `;
-
-                            searchResults.appendChild(restoDiv);
-                        });
-
-                    })
-                    .catch(error => {
-                        console.error('Erreur lors de la recherche :', error);
-                    });
-            });
         </script>
 </body>
 

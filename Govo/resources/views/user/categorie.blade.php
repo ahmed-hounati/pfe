@@ -33,10 +33,6 @@
                             <li><a href="/user/categories"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Categories</a>
                             </li>
-                            <li><a href="/user/dashboard"
-                                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">All
-                                    Plats</a>
-                            </li>
                             <li><a href="/orders/all"
                                     class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
                                     My orders</a>
@@ -148,17 +144,17 @@
         @endif
         <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             @foreach ($categories as $category)
-                <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                <a href="{{ route('categoryDetails', $category->id) }}"
+                    class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                     <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
                         style="background-image: url({{ asset('images/' . $category->image) }})">
                     </div>
                     <div
-                        class="w-56 -mt-10 overflow-hidden text-center bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
-                        <a href="{{ route('categoryDetails', $category->id) }}"
-                            class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
-                            {{ $category->name }}</a>
+                        class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64">
+                        <p class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
+                            {{ $category->name }}</p>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </section>

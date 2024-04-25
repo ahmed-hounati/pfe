@@ -64,6 +64,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/all', [OrderController::class, 'getOrders'])->name('payment')->middleware('user');
     Route::get('/ticket/{id}', [CardController::class, 'ticket'])->name('ticket')->middleware('user');
     Route::get('/search', [AuthController::class, 'search'])->name('resto.search')->middleware('user');
+    Route::get('/filter-plats', [PlatController::class, 'filterPlats'])->name('filterPlats')->middleware('user');
+
 });
 
 

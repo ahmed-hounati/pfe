@@ -13,4 +13,9 @@ class Plat extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function resto()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
