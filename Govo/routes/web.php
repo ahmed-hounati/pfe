@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrderCardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PlatController;
+use App\Models\Category;
 use GuzzleHttp\Middleware;
 
 /*
@@ -64,8 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/all', [OrderController::class, 'getOrders'])->name('payment')->middleware('user');
     Route::get('/ticket/{id}', [CardController::class, 'ticket'])->name('ticket')->middleware('user');
     Route::get('/search', [AuthController::class, 'search'])->name('resto.search')->middleware('user');
-    Route::get('/filter-plats', [PlatController::class, 'filterPlats'])->name('filterPlats')->middleware('user');
-
+    Route::get('/search/categories', [CategoriesController::class, 'search'])->name('categories.search')->middleware('user');
 });
 
 

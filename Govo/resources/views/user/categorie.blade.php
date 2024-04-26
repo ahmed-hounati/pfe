@@ -142,15 +142,31 @@
                 </span>
             </div>
         @endif
-        <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <form class="max-w-md mx-auto" action="" method="get">
+            <label for="query" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input type="search" name="title" id="searchInput"
+                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+                    placeholder="Search" required />
+                <button
+                    class="text-white absolute end-2.5 bottom-2.5 bg-[#F2BD36] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
+            </div>
+        </form>
+        <div id="restaurantContainer" class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             @foreach ($categories as $category)
                 <a href="{{ route('categoryDetails', $category->id) }}"
                     class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                     <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
                         style="background-image: url({{ asset('images/' . $category->image) }})">
                     </div>
-                    <div
-                        class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64">
+                    <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64">
                         <p class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
                             {{ $category->name }}</p>
                     </div>
@@ -175,6 +191,48 @@
         }
 
         updateOrderCount();
+
+        function searchRestaurants() {
+            const query = document.getElementById('searchInput').value;
+
+            $.ajax({
+                url: "/search/categories",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    query: query
+                },
+                success: function(response) {
+                    const categories = response.categories;
+                    const restaurantContainer = document.getElementById('restaurantContainer');
+                    restaurantContainer.innerHTML = '';
+
+                    categories.forEach(category => {
+                        const restoCard = `
+                            <a href="/category/${category.id}/plats" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                                <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
+                                    style="background-image: url(http://localhost:8000/images/${category.image})">
+                                </div>
+                                <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64">
+                                    <p class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">${category.name}</p>
+                                </div>
+                            </a>
+                        `;
+                        restaurantContainer.insertAdjacentHTML('beforeend', restoCard);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching categories:", error);
+                }
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            searchRestaurants();
+        });
+
+
+        searchRestaurants();
     </script>
 </body>
 

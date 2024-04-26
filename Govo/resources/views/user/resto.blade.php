@@ -159,25 +159,19 @@
                     class="text-white absolute end-2.5 bottom-2.5 bg-[#F2BD36] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
             </div>
         </form>
-        <section id="search-results" class="restos">
 
-            <div class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                @foreach ($restos as $resto)
-                    <a href="{{ route('restoPlats', $resto->id) }}"
-                        class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
-                        <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
-                            style="background-image: url({{ asset('images/' . $resto->image) }})">
-                        </div>
-                        <div
-                            class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
-                            <p
-                                class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
-                                {{ $resto->name }}</p>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </section>
+        <div id="restaurantContainer" class="px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            @foreach ($restos as $resto)
+                <a href="{{ route('restoPlats', $resto->id) }}"
+                    class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                    <img src="{{ asset('images/' . $resto->image) }}')">
+                    <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64 ">
+                        <p class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">
+                            {{ $resto->name }}</p>
+                    </div>
+                </a>
+            @endforeach
+        </div>
         <script>
             function updateOrderCount() {
                 $.ajax({
@@ -194,6 +188,50 @@
                 });
             }
             updateOrderCount();
+
+            function searchRestaurants() {
+                const query = document.getElementById('searchInput').value;
+
+                $.ajax({
+                    url: "/search",
+                    type: "GET",
+                    dataType: "json",
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+                        const restos = response.restos;
+                        const restaurantContainer = document.getElementById('restaurantContainer');
+
+                        restaurantContainer.innerHTML = '';
+
+                        restos.forEach(resto => {
+                            const restoCard = `
+                            <a href="/Restorents/${resto.id}/plats" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+
+                                <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
+                                    style="background-image: url(http://localhost:8000/images/${resto.image})">
+                                </div>
+                                <div class="w-56 -mt-10 overflow-hidden text-center bg-[#F2BD36] rounded-lg shadow-lg md:w-64">
+                                    <p class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">${resto.name}</p>
+                                </div>
+                            </a>
+                        `;
+                            restaurantContainer.insertAdjacentHTML('beforeend', restoCard);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching restaurants:", error);
+                    }
+                });
+            }
+
+            document.getElementById('searchInput').addEventListener('input', function() {
+                searchRestaurants();
+            });
+
+
+            searchRestaurants();
         </script>
 </body>
 

@@ -38,7 +38,7 @@ class CardController extends Controller
         $card->total = $total;
         $card->resto_id = $plat->resto_id;
         $card->save();
-        
+
 
 
         return redirect()->route('user.dashboard')->with([

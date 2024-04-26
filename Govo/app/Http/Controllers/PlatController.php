@@ -12,7 +12,9 @@ class PlatController extends Controller
 {
     public function allPlats()
     {
-        $plats = Plat::with('category')->get();
+        $resto_id = Auth::user()->id;
+        $plats = Plat::where('resto_id', $resto_id)
+            ->with('category')->get();
         return view('resto.plats', ['plats' => $plats]);
     }
 

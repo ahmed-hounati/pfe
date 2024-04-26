@@ -72,4 +72,14 @@ class CategoriesController extends Controller
         $category->delete();
         return redirect()->route('admin.dashboard')->with('success', 'Category deleted successfully!');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $categories = Category::where('name', 'like', "%$query%")
+            ->get();
+
+        return response()->json(['categories' => $categories]);
+    }
 }
