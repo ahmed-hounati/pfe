@@ -17,4 +17,3 @@ class Order extends Model
     }
 
 }
-
