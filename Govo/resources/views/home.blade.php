@@ -34,7 +34,7 @@
                     <!-- Mobile menu -->
                     <div class="lg:hidden">
                         <button aria-label="Open Menu" title="Open Menu"
-                            class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline">
+                            class="mobile-menu-button p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline">
                             <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"></path>
@@ -44,54 +44,33 @@
                                     d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"></path>
                             </svg>
                         </button>
-                        <!-- Mobile menu dropdown
-                            <div class="absolute top-0 left-0 w-full">
-                              <div class="p-5 bg-white border rounded shadow-sm">
+                        <div class="mobile-menu hidden absolute top-0 left-0 w-full">
+                            <div class="p-5 bg-white border rounded shadow-sm">
                                 <div class="flex items-center justify-between mb-4">
-                                  <div>
-                                    <a href="/" aria-label="Company" title="Company" class="inline-flex items-center">
-                                      <svg class="w-8 text-deep-purple-accent-400" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor" fill="none">
-                                        <rect x="3" y="1" width="7" height="12"></rect>
-                                        <rect x="3" y="17" width="7" height="6"></rect>
-                                        <rect x="14" y="1" width="7" height="6"></rect>
-                                        <rect x="14" y="11" width="7" height="12"></rect>
-                                      </svg>
-                                      <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Company</span>
-                                    </a>
-                                  </div>
-                                  <div>
-                                    <button aria-label="Close Menu" title="Close Menu" class="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                      <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
-                                        <path
-                                          fill="currentColor"
-                                          d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
-                                        ></path>
-                                      </svg>
-                                    </button>
-                                  </div>
+                                    <div>
+                                        <button aria-label="Close Menu" title="Close Menu"
+                                            class="close-menu-button p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                                            <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                                 <nav>
-                                  <ul class="space-y-4">
-                                    <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">Product</a></li>
-                                    <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">Features</a></li>
-                                    <li><a href="/" aria-label="Product pricing" title="Product pricing" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">Pricing</a></li>
-                                    <li><a href="/" aria-label="About us" title="About us" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">About us</a></li>
-                                    <li><a href="/" aria-label="Sign in" title="Sign in" class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">Sign in</a></li>
-                                    <li>
-                                      <a
-                                        href="/"
-                                        class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                        aria-label="Sign up"
-                                        title="Sign up"
-                                      >
-                                        Sign up
-                                      </a>
-                                    </li>
-                                  </ul>
+                                    <ul class="space-y-4">
+                                        <li><a href="/login" aria-label="Our product" title="Our product"
+                                                class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">login</a>
+                                        </li>
+                                        <a href="/register" aria-label="Sign up" title="Sign up">
+                                            Sign up
+                                        </a>
+                                        </li>
+                                    </ul>
                                 </nav>
-                              </div>
                             </div>
-                            -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,25 +110,30 @@
     </section>
     <section>
         <h1 class="text-center text-3xl font-bold">Best Plats</h1>
-        <div class="flex justify-center items-center h-screen">
+        <div class="z-1 p-24 flex flex-wrap items-center justify-center">
             @foreach ($plats as $plat)
-                <div class="group relative block overflow-hidden">
-                    <img src="{{ asset('images/' . $plat->image) }}" alt=""
-                        class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
-
-                    <div class="relative border border-gray-100 bg-white p-6">
-                        <span class="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium"> New </span>
-
-                        <h3 class="mt-4 text-lg font-medium text-gray-900">{{ $plat->name }}</h3>
-
-                        <p class="mt-1.5 text-sm text-gray-700">$14.99</p>
-
-                        <form class="mt-4">
-                            <button
-                                class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
-                                Add to Cart
-                            </button>
-                        </form>
+                <div
+                    class=" z-2 flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg">
+                    <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+                        style="transform: scale(1.5); opacity: 0.1;">
+                        <rect x="159.52" y="175" width="152" height="152" rx="8"
+                            transform="rotate(-45 159.52 175)" fill="white" />
+                        <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)"
+                            fill="white" />
+                    </svg>
+                    <div class="relative pt-10 px-10 flex items-center justify-center">
+                        <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                            style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;">
+                        </div>
+                        <img class="relative w-40 rounded-xl" src="{{ asset('images/' . $plat->image) }}"
+                            alt="">
+                    </div>
+                    <div class="relative text-white px-6 pb-6 mt-6">
+                        <div class="flex justify-between gap-4">
+                            <span class="block font-semibold text-xl">{{ $plat->name }}</span>
+                            <span
+                                class="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center">${{ $plat->price }}</span>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -250,6 +234,21 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mobileMenuButton = document.querySelector(".mobile-menu-button");
+            const closeButton = document.querySelector(".close-menu-button");
+            const mobileMenu = document.querySelector(".mobile-menu");
+
+            mobileMenuButton.addEventListener("click", function() {
+                mobileMenu.classList.toggle("hidden");
+            });
+            closeButton.addEventListener("click", function() {
+                mobileMenu.classList.add("hidden");
+            });
+        });
+    </script>
 </body>
 
 </html>
