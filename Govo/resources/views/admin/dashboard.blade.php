@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -240,8 +243,8 @@
                                                 <div class="text-center">
                                                     <p
                                                         class="mb-0 text-xs font-semibold leading-tight - dark:opacity-60">
-                                                        Role:</p>
-                                                    <h6 class="mb-0 text-sm leading-normal -">{{ $user->role }}</h6>
+                                                        E-mail:</p>
+                                                    <h6 class="mb-0 text-sm leading-normal -">{{ $user->email }}</h6>
                                                 </div>
                                             </td>
                                             <td
@@ -309,13 +312,14 @@
                                         </div>
                                         <div class="flex justify-between">
                                             <a href="{{ route('categories.edit', $category->id) }}"
-                                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Update</a>
+                                                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"><i class="fa-solid fa-pen"></i></a>
                                             <form method="POST"
                                                 action="{{ route('categories.destroy', $category->id) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><i
+                                                        class="fa-solid fa-trash"></i></button>
                                             </form>
                                         </div>
                                     </li>
