@@ -211,7 +211,7 @@
         }
 
         .box-date h2:last-child {
-            font-size: 1.8em;
+            font-size: 20px;
         }
 
         /* VENUE */
@@ -226,14 +226,17 @@
         .box-venue>* {
             align-self: stretch;
             text-align: center;
+            justify-content: center;
         }
 
         .box-venue h3 {
             font-weight: normal;
+            text-align: center;
         }
 
         .box-venue h3:first-child {
             letter-spacing: 0.08em;
+            text-align: center;
         }
 
         /* Footer */
@@ -289,9 +292,7 @@
                 </div>
                 <div class="ticket-body__date">
                     <div class="box-date">
-                        <h2 class="alfa">30</h2>
-                        <h3>APRIL</h3>
-                        <h2 class="alfa">2024</h2>
+                        <h2 class="alfa">{{$card->created_at}}</h2>
                     </div>
 
                     <div class="box-venue">
