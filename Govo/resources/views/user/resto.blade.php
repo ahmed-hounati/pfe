@@ -52,7 +52,7 @@
                             <a href="{{ route('card') }}">
                                 <i class="fa-solid fa-cart-shopping fa-lg text-white"></i>
                                 <span id="orderCount"
-                                    class="inline-block px-2 py-1 text-sm font-semibold leading-tight text-white bg-blue-500 rounded-full">
+                                    class="inline-block px-2 py-1 text-sm font-semibold leading-tight text-white bg-[#F2BD36] rounded-full">
                                 </span>
                             </a>
                         </li>
