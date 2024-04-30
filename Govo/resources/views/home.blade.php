@@ -230,6 +230,8 @@
                 mobileMenu.classList.add("hidden");
             });
         });
+
+        document.title = "test";
     </script>
 </body>
 
